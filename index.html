@@ -645,7 +645,9 @@
             .love-bg p,
             .timeline-event p,
             #note-display,
-            #modal-text, .bucket-list, .letter-container p {
+            #modal-text,
+            .bucket-list,
+            .letter-container p {
                 font-size: 1rem;
             }
 
@@ -694,8 +696,16 @@
                 padding: 30px 20px;
                 font-size: 1.5rem;
             }
-            .reason-card{
+
+            .reason-card {
                 padding: 15px;
+            }
+            .polaroid {
+                width: 125px;
+                max-width: 300px;
+            }
+            .polaroid img {
+                height: 150px;
             }
 
         }
@@ -881,6 +891,26 @@
                         alt="Memory 2">
                     <p>That perfect sunset</p>
                 </div>
+                <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&auto=format&fit=crop"
+                        alt="Memory 1">
+                    <p>Our First Trip</p>
+                </div>
+                <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&auto=format&fit=crop"
+                        alt="Memory 2">
+                    <p>That perfect sunset</p>
+                </div>
+                <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&auto=format&fit=crop"
+                        alt="Memory 1">
+                    <p>Our First Trip</p>
+                </div>
+                <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&auto=format&fit=crop"
+                        alt="Memory 2">
+                    <p>That perfect sunset</p>
+                </div>
             </div>
         </div>
 
@@ -911,47 +941,14 @@
     </div>
 
     <script>
-        // 1. PASSWORD & INITIALIZATION
-        function checkPassword() {
-            var password = document.getElementById("secret-password").value.toLowerCase();
-            if (password === "2026") {
-                document.getElementById("password-screen").style.opacity = "0";
-                setTimeout(function () {
-                    document.getElementById("password-screen").style.display = "none";
-                    document.getElementById("main-content").style.display = "block";
-                    document.getElementById("hearts-bg").style.display = "block"; // Start magic hearts
-                    createHearts(); // Generate hearts
 
-                    setTimeout(function () {
-                        document.getElementById("main-content").style.opacity = "1";
-                        initScrollReveal(); // Start the scroll animations
-                    }, 50);
-                }, 1000);
-            } else {
-                document.getElementById("error-message").style.display = "block";
-            }
-        }
-
-        // 2. MAIN DAYS TOGETHER COUNTER
+        const weddingDate = new Date("Dec 31, 2026 00:00:00").getTime();
+        const nextMeetDate = new Date("Mar 5, 2026 00:00:00").getTime(); // For "Meeting The Parents" countdown
         const startDate = new Date(2022, 0, 1);
         const today = new Date();
         const daysDifference = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-        document.getElementById("days-counter").innerText = daysDifference.toLocaleString() + " Days";
+        const heartChars = ['🤍', '🌸', '✨', '💖'];
 
-        // 3. FUTURE WEDDING COUNTDOWN (Placeholder date: Dec 31, 2026)
-        const weddingDate = new Date("Dec 31, 2026 00:00:00").getTime();
-        setInterval(function () {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-            if (distance > 0) {
-                document.getElementById("cd-days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-                document.getElementById("cd-hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("cd-mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("cd-secs").innerText = Math.floor((distance % (1000 * 60)) / 1000);
-            }
-        }, 1000);
-
-        // 4. RANDOM LOVE NOTE GENERATOR 
         const notes = [
             "Even when you needed space and we weren't speaking, my heart never stopped belonging to you.",
             "Those two years apart were the hardest of my life, but having you back makes every single day worth it.",
@@ -961,56 +958,7 @@
             "Every day during those two years, I kept a space open for you. I'm so glad you're home.",
             "You are the best decision I ever made, and choosing you again on February 28th was the easiest thing I've ever done."
         ];
-        function generateNote() {
-            const display = document.getElementById('note-display');
-            display.style.opacity = 0;
-            setTimeout(() => {
-                const rand = Math.floor(Math.random() * notes.length);
-                display.innerText = "❝ " + notes[rand] + " ❞";
-                display.style.opacity = 1;
-            }, 300);
-        }
 
-        // 5. BUCKET LIST TOGGLE
-        function toggleStrike(checkbox) {
-            const parentDiv = checkbox.parentElement;
-            if (checkbox.checked) { parentDiv.classList.add('struck'); }
-            else { parentDiv.classList.remove('struck'); }
-        }
-
-        // 6. SCROLL REVEAL ANIMATIONS (Intersection Observer)
-        function initScrollReveal() {
-            const reveals = document.querySelectorAll(".reveal");
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("active");
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            reveals.forEach(reveal => { observer.observe(reveal); });
-            // Trigger first check manually in case elements are already in view
-            setTimeout(() => { window.scrollBy(0, 1); window.scrollBy(0, -1); }, 500);
-        }
-
-        // 7. MAGICAL FLOATING HEARTS GENERATOR
-        function createHearts() {
-            const container = document.getElementById("hearts-bg");
-            const heartChars = ['🤍', '🌸', '✨', '💖'];
-            setInterval(() => {
-                const heart = document.createElement("div");
-                heart.classList.add("floating-heart");
-                heart.innerText = heartChars[Math.floor(Math.random() * heartChars.length)];
-                heart.style.left = Math.random() * 100 + "vw";
-                heart.style.animationDuration = (Math.random() * 5 + 5) + "s"; // 5 to 10 seconds
-                heart.style.fontSize = (Math.random() * 1 + 1) + "rem";
-                container.appendChild(heart);
-                setTimeout(() => { heart.remove(); }, 10000); // Clean up DOM
-            }, 800); // New heart every 800ms
-        }
-
-        // 8. MODAL (POPUP) DATA & LOGIC
         const modalData = {
             'jan2022': {
                 title: 'Where It All Began', date: 'January 2022',
@@ -1050,6 +998,90 @@
             }
         };
 
+        document.getElementById("days-counter").innerText = daysDifference.toLocaleString() + " Days";
+
+        // PASSWORD & INITIALIZATION
+        function checkPassword() {
+            var password = document.getElementById("secret-password").value.toLowerCase();
+            if (password === "2026") {
+                document.getElementById("password-screen").style.opacity = "0";
+                setTimeout(function () {
+                    document.getElementById("password-screen").style.display = "none";
+                    document.getElementById("main-content").style.display = "block";
+                    document.getElementById("hearts-bg").style.display = "block"; // Start magic hearts
+                    createHearts(); // Generate hearts
+
+                    setTimeout(function () {
+                        document.getElementById("main-content").style.opacity = "1";
+                        initScrollReveal(); // Start the scroll animations
+                    }, 50);
+                }, 1000);
+            } else {
+                document.getElementById("error-message").style.display = "block";
+            }
+        }
+
+        // FUTURE WEDDING COUNTDOWN (Placeholder date: Dec 31, 2026)
+        setInterval(function () {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            if (distance > 0) {
+                document.getElementById("cd-days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById("cd-hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("cd-mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("cd-secs").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+
+        // RANDOM LOVE NOTE GENERATOR 
+        function generateNote() {
+            const display = document.getElementById('note-display');
+            display.style.opacity = 0;
+            setTimeout(() => {
+                const rand = Math.floor(Math.random() * notes.length);
+                display.innerText = "❝ " + notes[rand] + " ❞";
+                display.style.opacity = 1;
+            }, 300);
+        }
+
+        // BUCKET LIST TOGGLE
+        function toggleStrike(checkbox) {
+            const parentDiv = checkbox.parentElement;
+            if (checkbox.checked) { parentDiv.classList.add('struck'); }
+            else { parentDiv.classList.remove('struck'); }
+        }
+
+        // SCROLL REVEAL ANIMATIONS (Intersection Observer)
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(reveal => { observer.observe(reveal); });
+            // Trigger first check manually in case elements are already in view
+            setTimeout(() => { window.scrollBy(0, 1); window.scrollBy(0, -1); }, 500);
+        }
+
+        // MAGICAL FLOATING HEARTS GENERATOR
+        function createHearts() {
+            const container = document.getElementById("hearts-bg");
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.classList.add("floating-heart");
+                heart.innerText = heartChars[Math.floor(Math.random() * heartChars.length)];
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 5 + 5) + "s"; // 5 to 10 seconds
+                heart.style.fontSize = (Math.random() * 1 + 1) + "rem";
+                container.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 10000); // Clean up DOM
+            }, 800); // New heart every 800ms
+        }
+
         function openModal(id) {
             const data = modalData[id];
             document.getElementById('modal-title').innerText = data.title;
@@ -1085,7 +1117,9 @@
                 setTimeout(() => { overlay.style.display = 'none'; }, 400);
             }
         }
+
     </script>
+
 </body>
 
 </html>
