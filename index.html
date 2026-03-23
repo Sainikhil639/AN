@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To My Future Wife</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         /* =========================================
            1. FONTS & VARIABLES
@@ -34,6 +37,8 @@
             color: var(--text-main);
             overflow-x: hidden;
             scroll-behavior: smooth;
+            -webkit-user-select: none;
+            /* Prevents text selection while holding button */
         }
 
         h1,
@@ -71,7 +76,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: #fdfaf6;
+            background: linear-gradient(rgba(253, 250, 246, 0.75), rgba(253, 250, 246, 0.92)), url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -129,6 +134,7 @@
             font-size: 5rem;
             margin: 0;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+            transition: opacity 0.5s;
         }
 
         .love-bg p {
@@ -172,7 +178,6 @@
         /* =========================================
            5. SPECIFIC COMPONENTS
            ========================================= */
-
         .counter-box {
             text-align: center;
             margin-bottom: 20px;
@@ -321,16 +326,18 @@
             position: relative;
         }
 
-        .bottle-container {
+        /* Generators (Notes, Dates, Questions) */
+        .generator-container {
             background: #faf5f5;
             padding: 40px;
             border-radius: 12px;
             border: 2px dashed var(--primary-color);
             position: relative;
             overflow: hidden;
+            margin-bottom: 30px;
         }
 
-        #note-display {
+        .generator-display {
             font-size: 1.4rem;
             font-style: italic;
             color: var(--primary-hover);
@@ -341,6 +348,82 @@
             line-height: 1.5;
         }
 
+        /* NEW LDR: VIRTUAL TOUCH (HOLD MY HAND) */
+        #glow-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, rgba(201, 122, 126, 0.35) 0%, rgba(250, 245, 245, 0) 80%);
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        #glow-overlay.active {
+            opacity: 1;
+        }
+
+        .touch-container {
+            background: #fff0f1;
+            padding: 40px 20px;
+            border-radius: 15px;
+            border: 2px dashed var(--border-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .heartbeat-display {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            opacity: 0.5;
+            transition: 0.5s;
+        }
+
+        .heartbeat-display.beating {
+            opacity: 1;
+            animation: heartbeatAnim 1s infinite;
+            filter: drop-shadow(0 0 15px rgba(201, 122, 126, 0.8));
+        }
+
+        @keyframes heartbeatAnim {
+            0% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.3);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.3);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #touch-message {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--primary-hover);
+            opacity: 0;
+            transition: opacity 1s ease;
+            margin-bottom: 0;
+        }
+
+        /* Envelopes */
         .envelope-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -373,6 +456,7 @@
             margin-bottom: 10px;
         }
 
+        /* Bucket List */
         .bucket-list {
             text-align: left;
             max-width: 550px;
@@ -414,6 +498,7 @@
             color: #aaa;
         }
 
+        /* The Love Letter */
         .letter-container {
             background-color: #fdfaf6;
             padding: 40px;
@@ -443,9 +528,91 @@
             font-family: serif;
         }
 
-        /* =========================================
-           NEW TIMER SECTION STYLES
-           ========================================= */
+        /* Under the Sky */
+        .sky-container {
+            background: linear-gradient(to bottom, #1a1a2e, #4a2c40);
+            color: white;
+            padding: 50px 20px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+
+        .sky-container h3 {
+            color: white;
+            font-size: 2.5rem;
+            margin-top: 0;
+            z-index: 2;
+            position: relative;
+        }
+
+        .sky-container p {
+            z-index: 2;
+            position: relative;
+            font-style: italic;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .map-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 400px;
+            margin: 40px auto 20px auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .city {
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .flight-path {
+            flex-grow: 1;
+            height: 2px;
+            border-top: 2px dashed rgba(255, 255, 255, 0.5);
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .plane {
+            position: absolute;
+            top: -16px;
+            font-size: 1.8rem;
+            color: #e0c2c4;
+            animation: drive 6s ease-in-out infinite;
+            left: 0;
+        }
+
+        @keyframes drive {
+            0% {
+                left: 0;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+
+        /* Timer Tabs */
         .timer-tabs {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -654,6 +821,7 @@
            RESPONSIVE ADJUSTMENTS
            ========================================= */
         @media (max-width: 768px) {
+
             .love-bg h1,
             #password-screen h1 {
                 font-size: 3rem;
@@ -671,10 +839,11 @@
 
             .love-bg p,
             .timeline-event p,
-            #note-display,
+            .generator-display,
             #modal-text,
             .bucket-list,
-            .letter-container p {
+            .letter-container p,
+            #touch-message {
                 font-size: 1rem;
             }
 
@@ -755,11 +924,23 @@
                 font-size: 0.9rem;
                 border: 1.5px solid var(--primary-color);
             }
+
+            .map-line {
+                margin-top: 20px;
+            }
+
+            .virtual-touch-section {
+                display: block !important;
+                flex-direction: column;
+                gap: 20px;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <div id="glow-overlay"></div>
 
     <div id="password-screen">
         <h1>For Your Eyes Only</h1>
@@ -785,6 +966,7 @@
 
         <div class="love-bg reveal">
             <h1>To My Future Wife</h1>
+            <p id="dynamic-greeting">To My Future Wife</p>
             <p>A love story that always finds its way back.</p>
 
             <div class="counter-box" style="margin-top: 30px;">
@@ -831,17 +1013,48 @@
                     when we found our way back to each other, I knew this was forever.</p>
                 <p>Meeting your parents just sealed what my heart already knew. You are my best friend, my greatest
                     adventure, and my future wife. I promise to hold onto us, through the good days and the bad.</p>
-                <p>Forever Yours,<br><span class="letter-container-p">Nikhil</span></p>
+                <p>Forever Yours,<br><span class="letter-container-p">Me</span></p>
             </div>
         </div>
 
         <div class="section reveal">
-            <h2>A Message For You</h2>
-            <div class="bottle-container">
-                <p style="font-size: 1.1rem; color: #555;">Having a bad day? Or just need a reminder of how much I love
-                    you?</p>
-                <button class="action-btn" onclick="generateNote()">Open A Note 💌</button>
-                <div id="note-display">"Click the button above whenever you miss me."</div>
+            <h2>Connection Hub</h2>
+            <p style="margin-bottom: 25px; color: var(--text-light);">Tools to keep us connected until we close the gap.
+            </p>
+
+            <div class="generator-container">
+                <h3><i class="fa-regular fa-envelope"></i> Need a Love Note?</h3>
+                <button class="action-btn" onclick="generateNote('note')">Open A Note</button>
+                <div id="note-display" class="generator-display">"Click the button above whenever you miss me."</div>
+            </div>
+
+            <div class="generator-container">
+                <h3><i class="fa-solid fa-film"></i> Virtual Date Night</h3>
+                <p style="font-size: 1rem; color: #666;">Can't decide what to do on call tonight?</p>
+                <button class="action-btn" onclick="generateNote('date')">Pick A Date Idea</button>
+                <div id="date-display" class="generator-display">"Let's see what we're doing tonight..."</div>
+            </div>
+
+            <div class="generator-container" style="margin-bottom: 0;">
+                <h3><i class="fa-regular fa-comments"></i> Conversation Starter</h3>
+                <p style="font-size: 1rem; color: #666;">Run out of things to talk about on FaceTime?</p>
+                <button class="action-btn" onclick="generateNote('question')">Ask A Question</button>
+                <div id="question-display" class="generator-display">"Let's dive deep..."</div>
+            </div>
+        </div>
+
+        <div class="section reveal virtual-touch-section" style="display: none;">
+            <h2>Virtual Touch 💓</h2>
+            <p style="margin-bottom: 25px; color: var(--text-light);">When the distance feels too heavy, press and hold
+                the button below.</p>
+
+            <div class="touch-container">
+                <div class="heartbeat-display" id="heartbeat-display">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <button class="action-btn" id="hold-btn" style="font-size: 2.2rem; border-radius: 50px;"><i
+                        class="fa-solid fa-fingerprint"></i></button>
+                <p id="touch-message">"I am holding your hand. I'm right here with you."</p>
             </div>
         </div>
 
@@ -850,18 +1063,46 @@
             <p style="margin-bottom: 25px; color: var(--text-light);">Little reminders for whatever you are feeling
                 right now.</p>
             <div class="envelope-grid">
-                <button class="envelope-btn" onclick="openModal('env_doubt')">
-                    <span>🌧️</span> Open when you doubt my love
-                </button>
-                <button class="envelope-btn" onclick="openModal('env_fight')">
-                    <span>😤</span> Open when we have a fight
-                </button>
-                <button class="envelope-btn" onclick="openModal('env_miss')">
-                    <span>🥺</span> Open when you miss me
-                </button>
-                <button class="envelope-btn" onclick="openModal('env_wedding')">
-                    <span>💍</span> Open on our Wedding Day
-                </button>
+                <button class="envelope-btn" onclick="openModal('env_doubt')"><span>🌧️</span> Open when you doubt my
+                    love</button>
+                <button class="envelope-btn" onclick="openModal('env_fight')"><span>😤</span> Open when we have a
+                    fight</button>
+                <button class="envelope-btn" onclick="openModal('env_miss')"><span>🥺</span> Open when you miss
+                    me</button>
+                <button class="envelope-btn" onclick="openModal('env_hug')"><span>🫂</span> Open when you need a
+                    hug</button>
+                <button class="envelope-btn" onclick="openModal('env_stress')"><span>😫</span> Open when you are
+                    stressed</button>
+                <button class="envelope-btn" onclick="openModal('env_sleep')"><span>🌙</span> Open when you can't
+                    sleep</button>
+                <button class="envelope-btn" onclick="openModal('env_mad')"><span>🙄</span> Open when you're mad at
+                    me</button>
+                <button class="envelope-btn" onclick="openModal('env_insecure')"><span>🪞</span> Open when you feel
+                    insecure</button>
+                <button class="envelope-btn" onclick="openModal('env_badday')"><span>⛈️</span> Open when you've had a
+                    bad day</button>
+                <button class="envelope-btn" onclick="openModal('env_laugh')"><span>😂</span> Open when you need a
+                    laugh</button>
+                <button class="envelope-btn" onclick="openModal('env_apart')"><span>✈️</span> Open when we are
+                    apart</button>
+                <button class="envelope-btn" onclick="openModal('env_future')"><span>🏡</span> Open when you think of
+                    our future</button>
+                <button class="envelope-btn" onclick="openModal('env_lonely')"><span>🕯️</span> Open when you feel
+                    lonely</button>
+                <button class="envelope-btn" onclick="openModal('env_motivate')"><span>🚀</span> Open when you need
+                    motivation</button>
+                <button class="envelope-btn" onclick="openModal('env_sick')"><span>🤒</span> Open when you are
+                    sick</button>
+                <button class="envelope-btn" onclick="openModal('env_secret')"><span>🤫</span> Open to know a
+                    secret</button>
+                <button class="envelope-btn" onclick="openModal('env_nostalgic')"><span>📸</span> Open when you feel
+                    nostalgic</button>
+                <button class="envelope-btn" onclick="openModal('env_proud')"><span>✨</span> Open when you achieve a
+                    goal</button>
+                <button class="envelope-btn" onclick="openModal('env_justbc')"><span>❤️</span> Open just
+                    because...</button>
+                <button class="envelope-btn" onclick="openModal('env_wedding')"><span>💍</span> Open on our Wedding
+                    Day</button>
             </div>
         </div>
 
@@ -872,11 +1113,11 @@
             <div class="bucket-list">
                 <div class="bucket-item">
                     <input type="checkbox" id="item1" onclick="toggleStrike(this)">
-                    <label for="item1">Travel to our absolute dream destination, just the two of us.</label>
+                    <label for="item1">Finally close the distance and wake up next to you every day.</label>
                 </div>
                 <div class="bucket-item">
                     <input type="checkbox" id="item2" onclick="toggleStrike(this)">
-                    <label for="item2">Build a home together that feels like our own private sanctuary.</label>
+                    <label for="item2">Travel to our absolute dream destination, just the two of us.</label>
                 </div>
                 <div class="bucket-item">
                     <input type="checkbox" id="item3" onclick="toggleStrike(this)">
@@ -941,22 +1182,33 @@
             </div>
         </div>
 
+        <div class="section reveal sky-container"
+            style="border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+            <h3>Under The Same Sky</h3>
+            <div class="map-line">
+                <div class="city">My Place</div>
+                <div class="flight-path">
+                    <div class="plane"><i class="fa-solid fa-car-side"></i></div>
+                </div>
+                <div class="city">Your Place</div>
+            </div>
+            <p>"Distance means so little when someone means so much.<br>We are always looking at the exact same moon."
+            </p>
+        </div>
+
         <footer>
             <div class="section reveal"
                 style="background: transparent; box-shadow: none; border-bottom: 2px dashed var(--border-light); border-top: 2px dashed var(--border-light); border-radius: 0;">
-
                 <div class="timer-tabs">
                     <button class="timer-tab-btn active" id="btn-meet" onclick="switchTab('meet')">Next Meet</button>
-                    <button class="timer-tab-btn" id="btn-wedding" onclick="switchTab('wedding')">Our
-                        Wedding</button>
+                    <button class="timer-tab-btn" id="btn-wedding" onclick="switchTab('wedding')">Our Wedding</button>
                     <button class="timer-tab-btn" id="btn-birthday" onclick="switchTab('birthday')">Your
                         Birthday</button>
                 </div>
 
                 <h2 id="timer-title" style="border: none;">Waiting For Our Future</h2>
                 <p id="timer-desc">I don't know the exact date yet, but I am already counting down the days until I can
-                    call
-                    you my wife.</p>
+                    call you my wife.</p>
 
                 <div class="countdown-grid" id="countdown-grid">
                     <div class="time-box"><span id="cd-days">00</span>
@@ -974,7 +1226,6 @@
                 </div>
 
                 <div id="dynamic-message" class="dynamic-message">I Love You ❤️</div>
-
             </div>
 
             I loved you then, I loved you in the silence, and I love you now.
@@ -982,191 +1233,208 @@
     </div>
 
     <script>
-        // TARGET DATES CONSTANTS
-        const TARGET_WEDDING = new Date("feb 14, 2028 00:00:00").getTime();
+        const TARGET_WEDDING_DATE = new Date("feb 14, 2028 00:00:00");
         const TARGET_MEET_DATE = new Date("Apr 08, 2026 00:00:00");
         const TARGET_MEET = TARGET_MEET_DATE.getTime();
+        const TARGET_WEDDING = TARGET_WEDDING_DATE.getTime();
 
-        // Birthday Constants (0-indexed month. 6 = July)
         const BDAY_MONTH = 6;
         const BDAY_DAY = 19;
 
         const startDate = new Date(2022, 0, 1);
         const today = new Date();
         const daysDifference = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-
-        // const heartChars = ['🤍', '🌸', '✨', '💖', '🖤', '❤️', '🩷', '💜'];
         const heartChars = ['🖤', '❤️'];
 
-        const notes = [
-            "Even when you needed space and we weren't speaking, my heart never stopped belonging to you.",
-            "Those two years apart were the hardest of my life, but having you back makes every single day worth it.",
-            "I loved you in the loud moments, I loved you in the silent years, and I will love you forever.",
-            "They say true love waits. I waited, and looking at you now, I'd wait a hundred more years if I had to.",
-            "My love for you didn't fade when you were gone; it just grew deeper roots.",
-            "Every day during those two years, I kept a space open for you. I'm so glad you're home.",
-            "You are the best decision I ever made, and choosing you again on February 28th was the easiest thing I've ever done."
-        ];
+        const ldrData = {
+            note: [
+                "Even when you needed space and we weren't speaking, my heart never stopped belonging to you.",
+                "Those two years apart were the hardest of my life, but having you back makes every single day worth it.",
+                "I loved you in the loud moments, I loved you in the silent years, and I will love you forever.",
+                "They say true love waits. I waited, and looking at you now, I'd wait a hundred more years if I had to.",
+                "Distance is just a test to see how far love can travel. We've passed the test.",
+                "Every day during those two years, I kept a space open for you. I'm so glad you're home.",
+                "You are the best decision I ever made, and choosing you again was the easiest thing I've ever done."
+            ],
+            date: [
+                "Order each other a surprise dessert on Swiggy/Zomato and eat it together on call! 🍰",
+                "Pick a movie on Netflix and hit play at the exact same second! 🎬",
+                "Play a 2-player mobile game together while on FaceTime (Ludo, UNO, etc)! 🎲",
+                "Take a personality test online together and read the results! 📝",
+                "Screen-share and look at Google Maps Street View of where we want to travel! 🗺️",
+                "Put the phone on the counter and cook the exact same recipe together! 🍳"
+            ],
+            question: [
+                "What was the exact moment you knew you wanted to spend your life with me?",
+                "What is the first thing we are going to do when we finally close the distance?",
+                "What is a small, everyday thing I do that makes you smile?",
+                "If we could teleport to anywhere in the world right now for 1 hour, where are we going?",
+                "What is your absolute favorite memory from the day we finally found our way back to each other?",
+                "What is something you want us to accomplish together in the next 5 years?"
+            ]
+        };
 
         const modalData = {
-            'jan2022': {
-                title: 'Where It All Began', date: 'January 2022',
-                text: "I still remember the exact feeling I had when we first started talking. I was nervous, completely captivated, and knew right away you were special.",
-                img: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop'
-            },
-            'jul2023': {
-                title: 'Making It Official', date: 'July 2023',
-                text: "There is a special kind of pride that comes with telling the world, 'She is mine, and I am hers.' Making it official was such a beautiful milestone.",
-                img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&auto=format&fit=crop'
-            },
-            'feb2026': {
-                title: 'Finding Our Way Back', date: 'February 28, 2026',
-                text: "Time apart only proved one thing: a life without you isn't a life I want to live. When we found our way back to each other, everything finally clicked into place. I chose you then, and I will choose you every day for the rest of my life.",
-                img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop'
-            },
-            'mar2026': {
-                title: 'Meeting The Parents', date: 'March 5, 2026',
-                text: "Walking up to your house to meet your parents, my heart was beating out of my chest. Not just because I wanted them to like me, but because this meant everything was real. It was the ultimate step toward our future.",
-                img: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&auto=format&fit=crop'
-            },
-            'env_doubt': {
-                title: 'When You Doubt Us', date: '', img: '',
-                text: "Look back at our story. For two years, we didn't speak. For two years, I didn't know if I would ever hold your hand again. But even in that silence, my love for you never wavered. Not for a single second.\n\nIf I didn't give up on us when you were completely out of my life, I am certainly never giving up on us now that I have you back. You are my forever. Stop doubting it."
-            },
-            'env_fight': {
-                title: 'When We Argue', date: '', img: '',
-                text: "Take a deep breath. Yes, I'm probably annoyed right now, and you're probably annoyed with me. \n\nBut remember this: We survived two whole years without each other. We survived heartbreaks and distance. This silly argument? We are going to survive this too. I love you way more than I love being right. Let's talk it out. I'm right here."
-            },
-            'env_miss': {
-                title: 'When You Miss Me', date: '', img: '',
-                text: "I miss you too. Whatever you're doing right now, just know that I'm probably thinking about your smile or the way you laugh.\n\nClose your eyes and remember that no matter where I am, my heart is always sitting right next to yours. I'll see you soon, beautiful."
-            },
-            'env_wedding': {
-                title: 'Our Wedding Day', date: '', img: '',
-                text: "Ah ah ah! Nice try! 😉\n\nYou are absolutely NOT allowed to read this until you are actually in your wedding dress getting ready to walk down the aisle to me.\n\nClose this right now and wait for the real day!"
-            },
-            'gallery1': {
-                title: 'Our First Trip',
-                date: 'Summer 2023',
-                text: "I'll never forget how much fun we had this day. Every time I look at this picture, it takes me right back to laughing with you.",
-                img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&auto=format&fit=crop'
-            },
-            'gallery2': {
-                title: 'That Perfect Sunset',
-                date: 'Fall 2023',
-                text: "We just sat there watching the sun go down. It was quiet, it was peaceful, and it was absolutely perfect because I was with you.",
-                img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop'
-            },
-            'gallery3': {
-                title: 'Memory 3',
-                date: 'Date goes here',
-                text: "This is where you can write a short story or inside joke about this specific picture. Remind her how she looked or what you were thinking.",
-                img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&auto=format&fit=crop'
-            },
-            'gallery4': {
-                title: 'Memory 4',
-                date: 'Date goes here',
-                text: "Replace this text with another beautiful memory. When she clicks the picture, she will read this message from you.",
-                img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop'
-            }
+            'jan2022': { title: 'Where It All Began', date: 'January 2022', text: "I still remember the exact feeling I had when we first started talking. I was nervous, completely captivated, and knew right away you were special.", img: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop' },
+            'jul2023': { title: 'Making It Official', date: 'July 2023', text: "There is a special kind of pride that comes with telling the world, 'She is mine, and I am hers.' Making it official was such a beautiful milestone.", img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&auto=format&fit=crop' },
+            'feb2026': { title: 'Finding Our Way Back', date: 'February 28, 2026', text: "Time apart only proved one thing: a life without you isn't a life I want to live. When we found our way back to each other, everything finally clicked into place. I chose you then, and I will choose you every day for the rest of my life.", img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop' },
+            'mar2026': { title: 'Meeting The Parents', date: 'March 5, 2026', text: "Walking up to your house to meet your parents, my heart was beating out of my chest. Not just because I wanted them to like me, but because this meant everything was real. It was the ultimate step toward our future.", img: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&auto=format&fit=crop' },
+            'env_doubt': { title: 'When You Doubt Us', date: '', img: '', text: "Look back at our story. For two years, we didn't speak. For two years, I didn't know if I would ever hold your hand again. But even in that silence, my love for you never wavered. Not for a single second.\n\nIf I didn't give up on us when you were completely out of my life, I am certainly never giving up on us now that I have you back. You are my forever. Stop doubting it." },
+            'env_fight': { title: 'When We Argue', date: '', img: '', text: "Take a deep breath. Yes, I'm probably annoyed right now, and you're probably annoyed with me. \n\nBut remember this: We survived two whole years without each other. We survived heartbreaks and distance. This silly argument? We are going to survive this too. I love you way more than I love being right. Let's talk it out. I'm right here." },
+            'env_miss': { title: 'When You Miss Me', date: '', img: '', text: "I miss you too. Whatever you're doing right now, just know that I'm probably thinking about your smile or the way you laugh.\n\nClose your eyes and remember that no matter where I am, my heart is always sitting right next to yours. I'll see you soon, beautiful." },
+            'env_hug': { title: 'When You Need A Hug', date: '', img: '', text: "Imagine me wrapping my arms securely around your waist, pulling you in close, and resting my chin on your head. \n\nWhatever is heavy on your shoulders right now, let me carry it for a while. You are safe with me." },
+            'env_stress': { title: 'When You Are Stressed', date: '', img: '', text: "Stop what you are doing. Drop your shoulders. Take a deep breath.\n\nYou are putting too much pressure on yourself. You have survived 100% of your hardest days. You are smart, capable, and incredibly strong. Take a break, drink some water, and remember I am always in your corner." },
+            'env_sleep': { title: 'When You Can\'t Sleep', date: '', img: '', text: "It's late, and your mind is probably racing. \n\nTry to focus on my heartbeat. Imagine lying on my chest. I'm right here holding you, keeping the world away. Close your eyes, my love. Tomorrow is a new day." },
+            'env_mad': { title: 'When You\'re Mad At Me', date: '', img: '', text: "Okay, I probably did something stupid. I'm sorry.\n\nEven when I'm an idiot, please remember that my intentions are always to love you and make you happy. Forgive me? (Imagine me making that face you can't stay mad at)." },
+            'env_insecure': { title: 'When You Feel Insecure', date: '', img: '', text: "You are the most beautiful woman I have ever laid eyes on. Inside and out. \n\nDuring those two years we were apart, I looked for your face in every crowd. No one else even comes close to you. Please see yourself the way I see you." },
+            'env_badday': { title: 'When You\'ve Had A Bad Day', date: '', img: '', text: "I hate that you had a bad day, and I hate even more that I can't instantly fix it. \n\nBut I promise to listen, to hold you, and to make you smile again. Come to me, let's order your favorite food and just forget about the rest of the world." },
+            'env_laugh': { title: 'When You Need A Laugh', date: '', img: '', text: "Just imagine me trying to do something I am absolutely terrible at (you know exactly what it is). \n\nOr remember that one inside joke we have that nobody else finds funny but makes us cry laughing. Your smile is my favorite thing; keep showing it." },
+            'env_apart': { title: 'When We Are Apart', date: '', img: '', text: "Distance means absolutely nothing to us. We conquered a two-year gap of total silence, remember? \n\nA few days or weeks of being apart is just a tiny bump in the road. I am counting down the seconds until I can kiss you again." },
+            'env_future': { title: 'Thinking Of Our Future', date: '', img: '', text: "I think about it all the time too. \n\nI can't wait to wake up next to you, make coffee in our kitchen, and build a life that is entirely ours. The wait will be so worth it when I get to call you my wife." },
+            'env_lonely': { title: 'When You Feel Lonely', date: '', img: '', text: "You are never alone. \n\nEven if I am not physically right beside you, my heart is tethered to yours. Read through this website again. Look at our photos. I am yours, completely and always." },
+            'env_motivate': { title: 'When You Need Motivation', date: '', img: '', text: "You have a fire in you that completely amazes me. \n\nWhatever you are trying to tackle right now, you can do it. I believe in you more than I believe in anything else. Go get 'em, babe." },
+            'env_sick': { title: 'When You Are Sick', date: '', img: '', text: "I wish I could take your sickness away and deal with it myself. \n\nGet some rest, drink plenty of fluids, and let me take care of you. I'm kissing your forehead (virtually, so I don't catch it! Just kidding, I'd kiss you anyway). Get well soon, my love." },
+            'env_secret': { title: 'A Little Secret', date: '', img: '', text: "Here is a secret: \n\nEven during those two years when we weren't together, and I pretended I was moving on and doing just fine... I wasn't. I was always missing you. I was always waiting for you." },
+            'env_nostalgic': { title: 'When You Feel Nostalgic', date: '', img: '', text: "Look how far we've come. \n\nFrom our first meeting in 2022, to making it official, to the messy middle, and finally finding our way back. Our story isn't a perfect fairy tale, it's a real, raw, resilient love story. And it's my favorite one ever told." },
+            'env_proud': { title: 'When You Achieve Something', date: '', img: '', text: "I AM SO PROUD OF YOU! 🎉\n\nI knew you could do it. I am constantly amazed by your brilliance and your work ethic. Let's celebrate this properly. You deserve the world." },
+            'env_justbc': { title: 'Just Because...', date: '', img: '', text: "I don't need a reason to tell you this: I love you. \n\nMore today than I did yesterday, but definitely not as much as I will tomorrow. Thank you for choosing me." },
+            'env_wedding': { title: 'Our Wedding Day', date: '', img: '', text: "Ah ah ah! Nice try! 😉\n\nYou are absolutely NOT allowed to read this until you are actually in your wedding dress getting ready to walk down the aisle to me.\n\nClose this right now and wait for the real day!" },
+            'gallery1': { title: 'Our First Trip', date: 'Summer 2023', text: "I'll never forget how much fun we had this day. Every time I look at this picture, it takes me right back to laughing with you.", img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&auto=format&fit=crop' },
+            'gallery2': { title: 'That Perfect Sunset', date: 'Fall 2023', text: "We just sat there watching the sun go down. It was quiet, it was peaceful, and it was absolutely perfect because I was with you.", img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop' },
+            'gallery3': { title: 'Memory 3', date: 'Date goes here', text: "This is where you can write a short story or inside joke about this specific picture. Remind her how she looked or what you were thinking.", img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&auto=format&fit=crop' },
+            'gallery4': { title: 'Memory 4', date: 'Date goes here', text: "Replace this text with another beautiful memory. When she clicks the picture, she will read this message from you.", img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop' }
         };
 
         document.getElementById("days-counter").innerText = daysDifference.toLocaleString() + " Days";
 
-        let currentTimerTab = 'meet'; // Default tab
+        function setGreeting() {
+            const hour = new Date().getHours();
+            const greetingEl = document.getElementById("dynamic-greeting");
+            if (hour >= 5 && hour < 12) { greetingEl.innerText = "Good Morning, Future Wife ☀️"; }
+            else if (hour >= 12 && hour < 18) { greetingEl.innerText = "Good Afternoon, Beautiful 🌷"; }
+            else { greetingEl.innerText = "Good Night, My Love 🌙"; }
+        }
 
+        function generateNote(type) {
+            let arrayToUse = ldrData[type];
+            let displayId = type + "-display";
+            const display = document.getElementById(displayId);
+            display.style.opacity = 0;
+            setTimeout(() => {
+                const rand = Math.floor(Math.random() * arrayToUse.length);
+                display.innerText = "❝ " + arrayToUse[rand] + " ❞";
+                display.style.opacity = 1;
+            }, 300);
+        }
+
+        /* --- NEW LDR: VIRTUAL TOUCH LOGIC --- */
+        const holdBtn = document.getElementById('hold-btn');
+        const glowOverlay = document.getElementById('glow-overlay');
+        const heartbeatDisplay = document.getElementById('heartbeat-display');
+        const touchMessage = document.getElementById('touch-message');
+        let vibrationInterval;
+
+        function startTouch(e) {
+            e.preventDefault();
+            glowOverlay.classList.add('active');
+            heartbeatDisplay.classList.add('beating');
+            touchMessage.style.opacity = '1';
+
+            // Try to vibrate if the phone supports it
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]); // Initial heartbeat
+                vibrationInterval = setInterval(() => {
+                    navigator.vibrate([100, 50, 100]);
+                }, 1000);
+            }
+        }
+
+        function endTouch(e) {
+            e.preventDefault();
+            glowOverlay.classList.remove('active');
+            heartbeatDisplay.classList.remove('beating');
+            touchMessage.style.opacity = '0';
+
+            if (navigator.vibrate) {
+                clearInterval(vibrationInterval);
+                navigator.vibrate(0);
+            }
+        }
+
+        // Add event listeners for holding down
+        holdBtn.addEventListener('mousedown', startTouch);
+        holdBtn.addEventListener('touchstart', startTouch, { passive: false });
+
+        // Add event listeners for letting go
+        holdBtn.addEventListener('mouseup', endTouch);
+        holdBtn.addEventListener('mouseleave', endTouch);
+        holdBtn.addEventListener('touchend', endTouch);
+        holdBtn.addEventListener('touchcancel', endTouch);
+
+
+        let currentTimerTab = 'meet';
         function switchTab(tabName) {
             currentTimerTab = tabName;
-
-            // Remove active class from all buttons, add to the clicked one
             document.querySelectorAll('.timer-tab-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('btn-' + tabName).classList.add('active');
-
-            // Force an immediate update so the user doesn't wait 1 second
             updateTimerLogic();
+        }
+
+        function formatDate(dateObj) {
+            const options = { month: 'long', day: 'numeric', year: 'numeric' };
+            return dateObj.toLocaleDateString('en-US', options);
         }
 
         function updateTimerLogic() {
             const nowObj = new Date();
             const now = nowObj.getTime();
-            let distance = 0;
-            let showTimer = true;
-            let finalMessage = "";
-
+            let distance = 0; let showTimer = true; let finalMessage = "";
             const titleEl = document.getElementById('timer-title');
             const descEl = document.getElementById('timer-desc');
             const gridEl = document.getElementById('countdown-grid');
             const msgEl = document.getElementById('dynamic-message');
 
-            // 1. WEDDING TAB
             if (currentTimerTab === 'wedding') {
-                titleEl.innerText = "Waiting For Our Future";
+                titleEl.innerText = "Waiting For Our Future\n" + formatDate(TARGET_WEDDING_DATE);
                 descEl.innerText = "I am already counting down the days until I can call you my wife.";
                 distance = TARGET_WEDDING - now;
-
-                if (distance <= 0) {
-                    showTimer = false;
-                    finalMessage = "I Love You ❤️";
-                }
+                if (distance <= 0) { showTimer = false; finalMessage = "I Love You ❤️"; }
             }
-
-            // 2. BIRTHDAY TAB
             else if (currentTimerTab === 'birthday') {
-                titleEl.innerText = "Your Special Day";
-                descEl.innerText = "Counting down to celebrate the day my favorite person was born.";
-
                 let currentYear = nowObj.getFullYear();
                 let bdayThisYear = new Date(currentYear, BDAY_MONTH, BDAY_DAY);
-
-                // Check if today is literally the birthday
                 let isToday = (nowObj.getMonth() === BDAY_MONTH && nowObj.getDate() === BDAY_DAY);
 
                 if (isToday) {
-                    showTimer = false;
-                    finalMessage = "Happy Birthday! 🎉";
+                    titleEl.innerText = "Your Special Day is Here!";
+                    descEl.innerText = "";
+                    showTimer = false; finalMessage = "Happy Birthday! 🎉";
                 } else {
-                    // If the birthday has already passed this year, countdown to next year
-                    if (now > bdayThisYear.getTime()) {
-                        bdayThisYear = new Date(currentYear + 1, BDAY_MONTH, BDAY_DAY);
-                    }
+                    if (now > bdayThisYear.getTime()) { bdayThisYear = new Date(currentYear + 1, BDAY_MONTH, BDAY_DAY); }
+                    titleEl.innerText = "Your Special Day\n" + formatDate(bdayThisYear);
+                    descEl.innerText = "Counting down to celebrate the day my favorite person was born.";
                     distance = bdayThisYear.getTime() - now;
                 }
             }
-
-            // 3. NEXT MEET TAB
             else if (currentTimerTab === 'meet') {
                 titleEl.innerText = "Next Meet: " + formatDate(TARGET_MEET_DATE);
                 descEl.innerText = "Counting down the seconds until I can see you again.";
                 distance = TARGET_MEET - now;
-
-                if (distance <= 0) {
-                    showTimer = false;
-                    finalMessage = "Waiting for next meet...";
-                }
+                if (distance <= 0) { showTimer = false; finalMessage = "Waiting for next meet..."; }
             }
 
-            // Display Logic: Show either the clock numbers OR the text message
             if (showTimer) {
-                gridEl.style.display = "flex";
-                msgEl.style.display = "none";
+                gridEl.style.display = "flex"; msgEl.style.display = "none";
                 document.getElementById("cd-days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
                 document.getElementById("cd-hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 document.getElementById("cd-mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 document.getElementById("cd-secs").innerText = Math.floor((distance % (1000 * 60)) / 1000);
             } else {
-                gridEl.style.display = "none";
-                msgEl.style.display = "block";
-                msgEl.innerText = finalMessage;
+                gridEl.style.display = "none"; msgEl.style.display = "block"; msgEl.innerText = finalMessage;
             }
         }
-
-        // Run the timer update every 1 second
         setInterval(updateTimerLogic, 1000);
 
-
-        // =========================================
-        // PASSWORD & OTHER LOGIC
-        // =========================================
         function checkPassword() {
             var password = document.getElementById("secret-password").value.toLowerCase();
             if (password === "2026") {
@@ -1176,38 +1444,22 @@
                     document.getElementById("main-content").style.display = "block";
                     document.getElementById("hearts-bg").style.display = "block";
                     createHearts();
-                    setTimeout(function () {
-                        document.getElementById("main-content").style.opacity = "1";
-                        initScrollReveal();
-                    }, 50);
+                    setGreeting();
+                    updateTimerLogic();
+                    setTimeout(function () { document.getElementById("main-content").style.opacity = "1"; initScrollReveal(); }, 50);
                 }, 1000);
-            } else {
-                document.getElementById("error-message").style.display = "block";
-            }
-        }
-
-        function generateNote() {
-            const display = document.getElementById('note-display');
-            display.style.opacity = 0;
-            setTimeout(() => {
-                const rand = Math.floor(Math.random() * notes.length);
-                display.innerText = "❝ " + notes[rand] + " ❞";
-                display.style.opacity = 1;
-            }, 300);
+            } else { document.getElementById("error-message").style.display = "block"; }
         }
 
         function toggleStrike(checkbox) {
             const parentDiv = checkbox.parentElement;
-            if (checkbox.checked) { parentDiv.classList.add('struck'); }
-            else { parentDiv.classList.remove('struck'); }
+            if (checkbox.checked) { parentDiv.classList.add('struck'); } else { parentDiv.classList.remove('struck'); }
         }
 
         function initScrollReveal() {
             const reveals = document.querySelectorAll(".reveal");
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) { entry.target.classList.add("active"); }
-                });
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("active"); } });
             }, { threshold: 0.1 });
             reveals.forEach(reveal => { observer.observe(reveal); });
             setTimeout(() => { window.scrollBy(0, 1); window.scrollBy(0, -1); }, 500);
@@ -1216,13 +1468,10 @@
         function createHearts() {
             const container = document.getElementById("hearts-bg");
             setInterval(() => {
-                const heart = document.createElement("div");
-                heart.classList.add("floating-heart");
+                const heart = document.createElement("div"); heart.classList.add("floating-heart");
                 heart.innerText = heartChars[Math.floor(Math.random() * heartChars.length)];
-                heart.style.left = Math.random() * 100 + "vw";
-                heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
-                heart.style.fontSize = (Math.random() * 1 + 1) + "rem";
-                container.appendChild(heart);
+                heart.style.left = Math.random() * 100 + "vw"; heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
+                heart.style.fontSize = (Math.random() * 1 + 1) + "rem"; container.appendChild(heart);
                 setTimeout(() => { heart.remove(); }, 10000);
             }, 800);
         }
@@ -1230,41 +1479,19 @@
         function openModal(id) {
             const data = modalData[id];
             document.getElementById('modal-title').innerText = data.title;
-
             const dateEl = document.getElementById('modal-date');
-            if (data.date) { dateEl.innerText = data.date; dateEl.style.display = 'block'; }
-            else { dateEl.style.display = 'none'; }
-
+            if (data.date) { dateEl.innerText = data.date; dateEl.style.display = 'block'; } else { dateEl.style.display = 'none'; }
             document.getElementById('modal-text').innerText = data.text;
-
             const imgElement = document.getElementById('modal-img');
-            if (data.img) {
-                imgElement.src = data.img;
-                imgElement.style.display = 'inline-block';
-            } else {
-                imgElement.style.display = 'none';
-            }
-
-            const overlay = document.getElementById('modal-overlay');
-            const box = document.getElementById('modal-box');
-            overlay.style.display = 'flex';
-            setTimeout(() => { overlay.style.opacity = '1'; box.style.transform = 'translateY(0)'; }, 10);
+            if (data.img) { imgElement.src = data.img; imgElement.style.display = 'inline-block'; } else { imgElement.style.display = 'none'; }
+            const overlay = document.getElementById('modal-overlay'); const box = document.getElementById('modal-box');
+            overlay.style.display = 'flex'; setTimeout(() => { overlay.style.opacity = '1'; box.style.transform = 'translateY(0)'; }, 10);
         }
-
-        // The Helper Function
-        function formatDate(dateObj) {
-            const options = { month: 'long', day: 'numeric' }; // Gives "April 8"
-            return dateObj.toLocaleDateString('en-US', options);
-        }
-
 
         function closeModal(event) {
             if (event.target.id === 'modal-overlay' || event.target.className === 'close-btn') {
-                const overlay = document.getElementById('modal-overlay');
-                const box = document.getElementById('modal-box');
-                overlay.style.opacity = '0';
-                box.style.transform = 'translateY(30px)';
-                setTimeout(() => { overlay.style.display = 'none'; }, 400);
+                const overlay = document.getElementById('modal-overlay'); const box = document.getElementById('modal-box');
+                overlay.style.opacity = '0'; box.style.transform = 'translateY(30px)'; setTimeout(() => { overlay.style.display = 'none'; }, 400);
             }
         }
     </script>
