@@ -301,7 +301,7 @@
         /* Reasons Grid */
         .reasons-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
@@ -371,7 +371,7 @@
 
         /* Message in a Bottle */
         .bottle-container {
-            background: #fff0f1;
+            background: #faf5f5;
             padding: 40px;
             border-radius: 12px;
             border: 2px dashed var(--primary-color);
@@ -393,7 +393,7 @@
         /* Envelopes */
         .envelope-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
         }
 
@@ -473,6 +473,12 @@
             position: relative;
         }
 
+        .letter-container-p {
+            font-size: 2.5rem;
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+        }
+
         .letter-container::before {
             content: "❝";
             font-size: 6rem;
@@ -487,11 +493,11 @@
         footer {
             text-align: center;
             padding: 50px 20px;
-            background-color: var(--border-light);
-            color: var(--primary-hover);
+            background: linear-gradient(rgba(253, 250, 246, 0.98), rgba(253, 250, 246, 0.79)), url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             font-family: var(--font-heading);
             font-size: 2.2rem;
             margin-top: 40px;
+            position: relative;
         }
 
         /* =========================================
@@ -624,12 +630,31 @@
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
-            .love-bg h1 {
-                font-size: 3.5rem;
+
+            .love-bg h1,
+            #password-screen h1 {
+                font-size: 3rem;
+            }
+
+            .counter-box h3,
+            #modal-title,
+            .letter-container-p {
+                font-size: 2rem;
+            }
+
+            .love-bg p,
+            .timeline-event p,
+            #note-display,
+            #modal-text, .bucket-list, .letter-container p {
+                font-size: 1rem;
+            }
+
+            .timeline-event h3 {
+                font-size: 1.5rem;
             }
 
             .section h2 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
             .section {
@@ -647,10 +672,32 @@
                 height: 12px;
             }
 
+            .envelope-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .reasons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             #modal-box {
                 padding: 30px 20px;
                 margin: 20px;
             }
+
+            .time-box {
+                padding: 5px 8px;
+                min-width: 45px;
+            }
+
+            footer {
+                padding: 30px 20px;
+                font-size: 1.5rem;
+            }
+            .reason-card{
+                padding: 15px;
+            }
+
         }
     </style>
 </head>
@@ -736,8 +783,7 @@
                     when we found our way back to each other, I knew this was forever.</p>
                 <p>Meeting your parents just sealed what my heart already knew. You are my best friend, my greatest
                     adventure, and my future wife. I promise to hold onto us, through the good days and the bad.</p>
-                <p>Forever Yours,<br><span
-                        style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--primary-color);">Nikhil</span>
+                <p>Forever Yours,<br><span class="letter-container-p">Nikhil</span>
                 </p>
             </div>
         </div>
