@@ -6,127 +6,651 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To My Future Wife</title>
     <style>
+        /* =========================================
+           1. FONTS & VARIABLES
+           ========================================= */
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 
+        :root {
+            --primary-color: #c97a7e;
+            --primary-hover: #a86266;
+            --bg-color: #faf5f5;
+            --card-bg: #ffffff;
+            --text-main: #4a4a4a;
+            --text-light: #777;
+            --border-light: #e0c2c4;
+            --font-heading: 'Dancing Script', cursive;
+            --font-body: 'Lora', serif;
+        }
+
+        /* =========================================
+           2. BASE STYLES & TYPOGRAPHY
+           ========================================= */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Lora', serif;
-            background-color: #faf5f5;
-            color: #4a4a4a;
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        h1, h2, h3 {
-            font-family: 'Dancing Script', cursive;
-            color: #c97a7e;
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
         }
 
-        /* Password Screen */
+        button,
+        .action-btn {
+            font-family: var(--font-body);
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover,
+        .action-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================
+           3. AUTHENTICATION SCREEN
+           ========================================= */
         #password-screen {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: #fdfaf6; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 1000; transition: opacity 1s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #fdfaf6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        #password-screen h1 { font-size: 3.5rem; margin-bottom: 10px; }
-        #password-screen input { padding: 12px; font-size: 1rem; border: 2px solid #e0c2c4; border-radius: 8px; width: 250px; text-align: center; outline: none; }
-        #password-screen button { margin-top: 15px; padding: 12px 25px; background-color: #c97a7e; color: white; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; }
-        #password-screen button:hover { background-color: #a86266; }
-        #error-message { color: #d9534f; margin-top: 10px; display: none; }
 
-        #main-content { display: none; opacity: 0; transition: opacity 1s ease; }
+        #password-screen h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
 
-        .love-bg { text-align: center; padding: 120px 20px; }
-        .love-bg h1 { font-size: 5rem; margin: 0; }
-        .love-bg p { font-size: 1.5rem; font-style: italic; }
+        #password-screen input {
+            padding: 12px;
+            font-size: 1.1rem;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 250px;
+            text-align: center;
+            outline: none;
+            margin: 25px;
+        }
 
-        .section { max-width: 900px; margin: 80px auto; padding: 20px; text-align: center; }
-        .section h2 { font-size: 3.5rem; border-bottom: 2px solid #e0c2c4; display: inline-block; padding-bottom: 10px; margin-bottom: 40px; }
+        #error-message {
+            color: #d9534f;
+            margin-top: 10px;
+            display: none;
+            font-weight: bold;
+        }
 
-        /* Timeline & A Tag Fixes */
-        .timeline { border-left: 3px solid #c97a7e; margin: 0 auto; text-align: left; padding-left: 30px; }
-        
+        /* =========================================
+           4. LAYOUT & SECTIONS
+           ========================================= */
+        #main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+            position: relative;
+        }
+
+        .love-bg {
+            text-align: center;
+            padding: 100px 20px 0px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .love-bg h1 {
+            font-size: 5rem;
+            margin: 0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .love-bg p {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        .section {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 40px 30px;
+            text-align: center;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            position: relative;
+            z-index: 10;
+        }
+
+        .section h2 {
+            font-size: 3.5rem;
+            border-bottom: 2px solid var(--border-light);
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           5. SPECIFIC COMPONENTS
+           ========================================= */
+
+        /* Audio Player */
+        .audio-wrapper {
+            margin-top: 20px;
+            background: #fff0f1;
+            padding: 15px;
+            border-radius: 50px;
+            display: inline-block;
+            border: 1px solid var(--border-light);
+        }
+
+        audio {
+            height: 35px;
+            outline: none;
+        }
+
+        /* Counters & Timers */
+        .counter-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .counter-box h3 {
+            font-size: 3rem;
+            margin: 0;
+            color: var(--primary-hover);
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .time-box {
+            background: #fff0f1;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            min-width: 60px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-hover);
+        }
+
+        .time-box p {
+            margin: 0;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Timeline */
+        .timeline {
+            border-left: 3px solid var(--primary-color);
+            margin: 0 auto;
+            text-align: left;
+            padding-left: 25px;
+            max-width: 650px;
+        }
+
         .timeline-event {
             display: block;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             position: relative;
-            text-decoration: none; /* REMOVES UNDERLINE */
-            color: #4a4a4a; /* REMOVES BLUE COLOR */
+            text-decoration: none;
+            color: var(--text-main);
             cursor: pointer;
-            padding: 15px;
-            border-radius: 8px;
-            transition: background-color 0.3s, transform 0.3s;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.3s;
+            background: #faf5f5;
+            border: 1px solid transparent;
         }
 
-        /* Adds a cute hover effect to let her know it's clickable */
         .timeline-event:hover {
             background-color: #fff0f1;
             transform: translateX(5px);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 5px 15px rgba(201, 122, 126, 0.1);
         }
 
         .timeline-event::before {
-            content: ''; position: absolute; left: -49px; top: 15px;
-            width: 15px; height: 15px; background-color: #faf5f5;
-            border: 3px solid #c97a7e; border-radius: 50%;
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 20px;
+            width: 16px;
+            height: 16px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px white;
         }
-        .timeline-event h3 { margin: 0 0 5px 0; font-size: 2rem; pointer-events: none; }
-        .timeline-event span { font-weight: bold; color: #a86266; font-size: 1rem; display: block; margin-bottom: 8px; pointer-events: none; }
-        .timeline-event p { font-size: 1.1rem; line-height: 1.6; pointer-events: none; margin: 0; }
 
-        .counter-box {
-            background-color: #fff; padding: 30px; border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); margin: -50px auto 40px auto; max-width: 600px; position: relative;
+        .timeline-event h3 {
+            margin: 0 0 5px 0;
+            font-size: 2rem;
+            pointer-events: none;
         }
-        .counter-box h3 { font-size: 2.5rem; margin: 0; color: #a86266; }
-        .counter-box p { font-size: 1.2rem; margin-top: 5px; }
 
-        .letter-container {
-            background-color: #fdfaf6; padding: 50px; border: 1px solid #e0c2c4;
-            border-radius: 5px; box-shadow: inset 0 0 20px rgba(201, 122, 126, 0.1); text-align: left; line-height: 1.8; font-size: 1.2rem; position: relative;
+        .timeline-event span {
+            font-weight: bold;
+            color: var(--primary-hover);
+            font-size: 0.95rem;
+            display: block;
+            margin-bottom: 5px;
+            pointer-events: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .letter-container::before { content: "❝"; font-size: 6rem; color: #e0c2c4; position: absolute; top: -10px; left: 20px; opacity: 0.5; font-family: serif; }
 
-        .reasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .timeline-event p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            pointer-events: none;
+            margin: 0;
+            text-align: justify;
+        }
+
+        /* Reasons Grid */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
         .reason-card {
-            background: #fff; border-radius: 10px; padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); border-top: 4px solid #c97a7e; transition: transform 0.3s;
+            background: var(--bg-color);
+            border-radius: 10px;
+            padding: 20px;
+            border-top: 4px solid var(--primary-color);
+            transition: 0.3s;
         }
-        .reason-card:hover { transform: translateY(-5px); }
 
-        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+        .reason-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .reason-card strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        /* Photo Gallery */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
         .polaroid {
-            background: white; padding: 15px 15px 40px 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); width: 250px; transition: transform 0.3s;
+            background: white;
+            padding: 12px 12px 35px 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 220px;
+            transition: 0.3s ease;
         }
-        .polaroid img { width: 100%; height: 250px; object-fit: cover; }
-        .polaroid p { font-family: 'Dancing Script', cursive; font-size: 1.5rem; margin-top: 15px; color: #333; margin-bottom: 0;}
-        .polaroid:nth-child(even) { transform: rotate(5deg); }
-        .polaroid:nth-child(odd) { transform: rotate(-3deg); }
-        .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 10; position: relative; }
 
-        footer { text-align: center; padding: 40px; background-color: #e0c2c4; color: white; font-family: 'Dancing Script', cursive; font-size: 2rem; }
+        .polaroid img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .polaroid p {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-top: 12px;
+            color: #333;
+            margin-bottom: 0;
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(3deg);
+        }
+
+        .polaroid:nth-child(odd) {
+            transform: rotate(-3deg);
+        }
+
+        .polaroid:hover {
+            transform: scale(1.05) rotate(0deg);
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Message in a Bottle */
+        .bottle-container {
+            background: #fff0f1;
+            padding: 40px;
+            border-radius: 12px;
+            border: 2px dashed var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #note-display {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--primary-hover);
+            min-height: 80px;
+            margin-top: 25px;
+            transition: opacity 0.5s;
+            font-family: var(--font-body);
+            line-height: 1.5;
+        }
+
+        /* Envelopes */
+        .envelope-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .envelope-btn {
+            background: #fffafb;
+            border: 2px solid var(--border-light);
+            padding: 25px 15px;
+            border-radius: 12px;
+            color: var(--primary-hover);
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .envelope-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .envelope-btn span {
+            display: block;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Bucket List */
+        .bucket-list {
+            text-align: left;
+            max-width: 550px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+        }
+
+        .bucket-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: 0.3s;
+            background: #faf5f5;
+            border: 1px solid transparent;
+        }
+
+        .bucket-item:hover {
+            border-color: var(--border-light);
+        }
+
+        .bucket-item input {
+            margin-top: 6px;
+            margin-right: 15px;
+            transform: scale(1.4);
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .bucket-item label {
+            cursor: pointer;
+            line-height: 1.5;
+            transition: 0.3s;
+        }
+
+        .bucket-item.struck label {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+
+        /* The Love Letter */
+        .letter-container {
+            background-color: #fdfaf6;
+            padding: 40px;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            box-shadow: inset 0 0 20px rgba(201, 122, 126, 0.05);
+            text-align: justify;
+            line-height: 1.8;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .letter-container::before {
+            content: "❝";
+            font-size: 6rem;
+            color: var(--border-light);
+            position: absolute;
+            top: -15px;
+            left: 15px;
+            opacity: 0.4;
+            font-family: serif;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: var(--border-light);
+            color: var(--primary-hover);
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            margin-top: 40px;
+        }
 
         /* =========================================
-           MODAL (POPUP) STYLES
+           6. MODAL (POPUP) & ANIMATIONS
            ========================================= */
         #modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.6); z-index: 2000; justify-content: center; align-items: center;
-            opacity: 0; transition: opacity 0.3s ease;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
+            backdrop-filter: blur(5px);
         }
+
         #modal-box {
-            background: #fffafb; padding: 30px; border-radius: 12px; max-width: 500px; width: 90%;
-            text-align: center; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            transform: translateY(20px); transition: transform 0.3s ease; max-height: 90vh; overflow-y: auto;
+            background: #fffafb;
+            padding: 40px 30px;
+            border-radius: 15px;
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transform: translateY(30px);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 30px;
         }
+
         .close-btn {
-            position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: #a86266; line-height: 1;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: var(--primary-hover);
+            line-height: 1;
+            transition: 0.2s;
         }
-        .close-btn:hover { color: #d9534f; }
-        #modal-img { width: 100%; border-radius: 8px; max-height: 250px; object-fit: cover; margin-bottom: 15px; border: 2px solid #f2e1e2; }
-        #modal-title { font-family: 'Dancing Script', cursive; color: #c97a7e; font-size: 3rem; margin: 0 0 5px 0; }
-        #modal-date { font-weight: bold; color: #a86266; margin-bottom: 15px; font-size: 1.1rem; }
-        #modal-text { font-size: 1.1rem; line-height: 1.6; text-align: left; color: #555; }
+
+        .close-btn:hover {
+            color: #d9534f;
+            transform: scale(1.1);
+        }
+
+        #modal-img {
+            width: 100%;
+            border-radius: 10px;
+            max-height: 300px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid #f2e1e2;
+            display: none;
+        }
+
+        #modal-title {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            font-size: 3rem;
+            margin: 0 0 5px 0;
+        }
+
+        #modal-date {
+            font-weight: bold;
+            color: var(--primary-hover);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #modal-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            text-align: justify;
+            color: #555;
+            white-space: pre-wrap;
+        }
+
+        /* Background Floating Hearts Container */
+        #hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+            display: none;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(224, 194, 196, 0.6);
+            animation: floatUp linear infinite;
+            bottom: -50px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .love-bg h1 {
+                font-size: 3.5rem;
+            }
+
+            .section h2 {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 30px 15px;
+                margin: 40px 10px;
+            }
+
+            .timeline {
+                padding-left: 20px;
+            }
+
+            .timeline-event::before {
+                left: -31px;
+                width: 12px;
+                height: 12px;
+            }
+
+            #modal-box {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+        }
     </style>
 </head>
 
@@ -134,11 +658,13 @@
 
     <div id="password-screen">
         <h1>For Your Eyes Only</h1>
-        <p>Enter the year we found our way back to each other.</p>
-        <input value="2026" type="password" id="secret-password" placeholder="Password">
-        <button onclick="checkPassword()">Unlock</button>
+        <p style="font-size: 1.2rem; color: #666;">Enter the year we found our way back to each other.</p>
+        <input value="2026" type="password" id="secret-password" placeholder="Hint: 2026">
+        <button onclick="checkPassword()">Unlock My Heart</button>
         <div id="error-message">Oops! That's not right. Try again!</div>
     </div>
+
+    <div id="hearts-bg"></div>
 
     <div id="modal-overlay" onclick="closeModal(event)">
         <div id="modal-box">
@@ -152,113 +678,192 @@
 
     <div id="main-content">
 
-        <div class="love-bg">
+        <div class="love-bg reveal">
             <h1>To My Future Wife</h1>
             <p>A love story that always finds its way back.</p>
+
+            <div class="counter-box" style="margin-top: 30px;">
+                <h3 id="days-counter">0 Days</h3>
+                <p>since our story began, proving true love always finds a way.</p>
+            </div>
+
+            <div class="audio-wrapper">
+                <p style="margin: 0 0 5px 0; font-size: 0.9rem; font-weight: bold; color: #a86266;">🎵 Play Our Song</p>
+                <audio controls loop>
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
         </div>
 
-        <div class="counter-box">
-            <h3 id="days-counter">0 Days</h3>
-            <p>since our story first began, through every twist and turn.</p>
-        </div>
-
-        <div class="section">
+        <div class="section reveal">
             <h2>Our Journey</h2>
-            <p style="font-style: italic; color: #a86266; margin-top: -30px; margin-bottom: 40px;">(Click on a memory to read more)</p>
+            <p style="font-style: italic; color: var(--text-light); margin-top: -20px; margin-bottom: 30px;">(Click on a
+                memory to read more)</p>
             <div class="timeline">
-                
                 <a class="timeline-event" onclick="openModal('jan2022')">
                     <span>January 2022</span>
                     <h3>Where It All Began</h3>
-                    <p>The very start of our story. We had a lot of learning to do, and our path wasn't perfectly straight, but this was the moment my life changed forever.</p>
+                    <p>The very start of our story. We had a lot of learning to do, but this was the moment my life
+                        changed forever.</p>
                 </a>
-
                 <a class="timeline-event" onclick="openModal('jul2023')">
                     <span>July 2023</span>
                     <h3>Making It Official</h3>
-                    <p>The month we proudly told the world about us. Even though we faced storms later that year, the love we shared was always real.</p>
+                    <p>The month we proudly told the world about us. A beautiful milestone.</p>
                 </a>
-                
                 <a class="timeline-event" onclick="openModal('feb2026')">
                     <span>February 28, 2026</span>
                     <h3>Finding Our Way Back</h3>
-                    <p>Some loves are just meant to be. After everything we went through, we chose each other again. The ultimate patch-up, stronger and more certain than ever before.</p>
+                    <p>Some loves are just meant to be. The ultimate reunion, stronger than ever before.</p>
                 </a>
-                
                 <a class="timeline-event" onclick="openModal('mar2026')">
                     <span>March 5, 2026</span>
                     <h3>Meeting The Parents</h3>
-                    <p>Walking into your house and meeting your parents. A massive step that made me realize, more than ever, that I want you as my wife.</p>
+                    <p>Walking into your house. A massive step that made me realize I want you as my wife.</p>
                 </a>
             </div>
         </div>
 
-        <div class="section">
-            <h2>My Promise to You</h2>
+        <div class="section reveal">
+            <h2>My Promise</h2>
             <div class="letter-container">
                 <p>My dearest,</p>
-                <p>They say the best relationships aren't the ones without struggles, but the ones where both people refuse to give up. We have had our breakups, our fights, and our time apart. But on February 28th, when we found our way back to each other, I knew this was forever.</p>
-                <p>Meeting your parents just sealed what my heart already knew. You are my best friend, my greatest adventure, and my future wife. I promise to hold onto us, through the good days and the bad.</p>
-                <p>Forever Yours,<br><span style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: #c97a7e;">Nikhil</span></p>
+                <p>They say the best relationships aren't the ones without struggles, but the ones where both people
+                    refuse to give up. We have had our breakups, our fights, and our time apart. But on February 28th,
+                    when we found our way back to each other, I knew this was forever.</p>
+                <p>Meeting your parents just sealed what my heart already knew. You are my best friend, my greatest
+                    adventure, and my future wife. I promise to hold onto us, through the good days and the bad.</p>
+                <p>Forever Yours,<br><span
+                        style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--primary-color);">Nikhil</span>
+                </p>
             </div>
         </div>
 
-        <div class="section">
-            <h2>Our Beautiful Memories</h2>
+        <div class="section reveal">
+            <h2>A Message For You</h2>
+            <div class="bottle-container">
+                <p style="font-size: 1.1rem; color: #555;">Having a bad day? Or just need a reminder of how much I love
+                    you?</p>
+                <button class="action-btn" onclick="generateNote()">Open A Note 💌</button>
+                <div id="note-display">"Click the button above whenever you miss me."</div>
+            </div>
+        </div>
+
+        <div class="section reveal">
+            <h2>"Open When..."</h2>
+            <p style="margin-bottom: 25px; color: var(--text-light);">Little reminders for whatever you are feeling
+                right now.</p>
+            <div class="envelope-grid">
+                <button class="envelope-btn" onclick="openModal('env_doubt')">
+                    <span>🌧️</span> Open when you doubt my love
+                </button>
+                <button class="envelope-btn" onclick="openModal('env_fight')">
+                    <span>😤</span> Open when we have a fight
+                </button>
+                <button class="envelope-btn" onclick="openModal('env_miss')">
+                    <span>🥺</span> Open when you miss me
+                </button>
+                <button class="envelope-btn" onclick="openModal('env_wedding')">
+                    <span>💍</span> Open on our Wedding Day
+                </button>
+            </div>
+        </div>
+
+        <div class="section reveal">
+            <h2>Our "Forever" Bucket List</h2>
+            <p style="margin-bottom: 25px; color: var(--text-light);">Things I can't wait to do with you over the next
+                50 years.</p>
+            <div class="bucket-list">
+                <div class="bucket-item">
+                    <input type="checkbox" id="item1" onclick="toggleStrike(this)">
+                    <label for="item1">Travel to our absolute dream destination, just the two of us.</label>
+                </div>
+                <div class="bucket-item">
+                    <input type="checkbox" id="item2" onclick="toggleStrike(this)">
+                    <label for="item2">Build a home together that feels like our own private sanctuary.</label>
+                </div>
+                <div class="bucket-item">
+                    <input type="checkbox" id="item3" onclick="toggleStrike(this)">
+                    <label for="item3">Tell our future kids the story of how we fought for each other and found our way
+                        back in 2026.</label>
+                </div>
+                <div class="bucket-item">
+                    <input type="checkbox" id="item4" onclick="toggleStrike(this)">
+                    <label for="item4">Grow old together and still look at you the exact same way I do right
+                        now.</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="section reveal">
+            <h2>Things I Love About You</h2>
+            <div class="reasons-grid">
+                <div class="reason-card"><strong>1. Your Eyes</strong>
+                    <p>I could get lost in them forever.</p>
+                </div>
+                <div class="reason-card"><strong>2. Your Smile</strong>
+                    <p>It literally lights up my darkest days.</p>
+                </div>
+                <div class="reason-card"><strong>3. Your Voice</strong>
+                    <p>My absolute favorite sound. Hearing you brings me peace.</p>
+                </div>
+                <div class="reason-card"><strong>4. Your Smarts</strong>
+                    <p>You are incredibly intelligent. The way your mind works amazes me.</p>
+                </div>
+                <div class="reason-card"><strong>5. Your Responsibility</strong>
+                    <p>The way you handle everything with grace makes me feel secure.</p>
+                </div>
+                <div class="reason-card"><strong>6. Your Attitude</strong>
+                    <p>Your fierce spirit inspires me to be a better man.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section reveal">
+            <h2>Our Memories</h2>
             <div class="gallery">
                 <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&auto=format&fit=crop" alt="Memory 1">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&auto=format&fit=crop"
+                        alt="Memory 1">
                     <p>Our First Trip</p>
                 </div>
                 <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&auto=format&fit=crop" alt="Memory 2">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&auto=format&fit=crop"
+                        alt="Memory 2">
                     <p>That perfect sunset</p>
-                </div>
-                <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400&auto=format&fit=crop" alt="Memory 3">
-                    <p>Just being silly</p>
                 </div>
             </div>
         </div>
 
-        <div class="section">
-            <h2>Things I Love About You</h2>
-            <div class="reasons-grid">
-                <div class="reason-card">
-                    <strong>1. Your Eyes</strong>
-                    <p>I could get lost in them forever. They show exactly how beautiful your soul is.</p>
+        <div class="section reveal"
+            style="background: transparent; box-shadow: none; border-top: 2px dashed var(--border-light); border-radius: 0;">
+            <h2 style="border: none;">Waiting For Our Future</h2>
+            <p>I don't know the exact date yet, but I am already counting down the days until I can call you my wife.
+            </p>
+            <div class="countdown-grid">
+                <div class="time-box"><span id="cd-days">00</span>
+                    <p>Days</p>
                 </div>
-                <div class="reason-card">
-                    <strong>2. Your Smile</strong>
-                    <p>It literally lights up my darkest days.</p>
+                <div class="time-box"><span id="cd-hours">00</span>
+                    <p>Hours</p>
                 </div>
-                <div class="reason-card">
-                    <strong>3. Your Voice</strong>
-                    <p>My absolute favorite sound in the world. Hearing you brings me peace.</p>
+                <div class="time-box"><span id="cd-mins">00</span>
+                    <p>Mins</p>
                 </div>
-                <div class="reason-card">
-                    <strong>4. Your Smarts</strong>
-                    <p>You are incredibly intelligent. The way your mind works amazes me.</p>
-                </div>
-                <div class="reason-card">
-                    <strong>5. Your Responsibility</strong>
-                    <p>The way you handle everything with such grace makes me feel so secure.</p>
-                </div>
-                <div class="reason-card">
-                    <strong>6. Your Attitude</strong>
-                    <p>Your fierce spirit and the way you carry yourself inspire me to be better.</p>
+                <div class="time-box"><span id="cd-secs">00</span>
+                    <p>Secs</p>
                 </div>
             </div>
         </div>
 
         <footer>
-            I love you more than words can say.
+            I loved you then, I loved you in the silence, and I love you now.
         </footer>
-
     </div>
 
     <script>
-        // PASSWORD LOGIC
+        // 1. PASSWORD & INITIALIZATION
         function checkPassword() {
             var password = document.getElementById("secret-password").value.toLowerCase();
             if (password === "2026") {
@@ -266,8 +871,12 @@
                 setTimeout(function () {
                     document.getElementById("password-screen").style.display = "none";
                     document.getElementById("main-content").style.display = "block";
+                    document.getElementById("hearts-bg").style.display = "block"; // Start magic hearts
+                    createHearts(); // Generate hearts
+
                     setTimeout(function () {
                         document.getElementById("main-content").style.opacity = "1";
+                        initScrollReveal(); // Start the scroll animations
                     }, 50);
                 }, 1000);
             } else {
@@ -275,80 +884,160 @@
             }
         }
 
-        // DATE COUNTER LOGIC
+        // 2. MAIN DAYS TOGETHER COUNTER
         const startDate = new Date(2022, 0, 1);
         const today = new Date();
-        const timeDifference = today - startDate;
-        const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const daysDifference = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
         document.getElementById("days-counter").innerText = daysDifference.toLocaleString() + " Days";
 
-        // =========================================
-        // MODAL LOGIC & DATA (The extra expanded text)
-        // =========================================
-        const memoryData = {
+        // 3. FUTURE WEDDING COUNTDOWN (Placeholder date: Dec 31, 2026)
+        const weddingDate = new Date("Dec 31, 2026 00:00:00").getTime();
+        setInterval(function () {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            if (distance > 0) {
+                document.getElementById("cd-days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById("cd-hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("cd-mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("cd-secs").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+
+        // 4. RANDOM LOVE NOTE GENERATOR 
+        const notes = [
+            "Even when you needed space and we weren't speaking, my heart never stopped belonging to you.",
+            "Those two years apart were the hardest of my life, but having you back makes every single day worth it.",
+            "I loved you in the loud moments, I loved you in the silent years, and I will love you forever.",
+            "They say true love waits. I waited, and looking at you now, I'd wait a hundred more years if I had to.",
+            "My love for you didn't fade when you were gone; it just grew deeper roots.",
+            "Every day during those two years, I kept a space open for you. I'm so glad you're home.",
+            "You are the best decision I ever made, and choosing you again on February 28th was the easiest thing I've ever done."
+        ];
+        function generateNote() {
+            const display = document.getElementById('note-display');
+            display.style.opacity = 0;
+            setTimeout(() => {
+                const rand = Math.floor(Math.random() * notes.length);
+                display.innerText = "❝ " + notes[rand] + " ❞";
+                display.style.opacity = 1;
+            }, 300);
+        }
+
+        // 5. BUCKET LIST TOGGLE
+        function toggleStrike(checkbox) {
+            const parentDiv = checkbox.parentElement;
+            if (checkbox.checked) { parentDiv.classList.add('struck'); }
+            else { parentDiv.classList.remove('struck'); }
+        }
+
+        // 6. SCROLL REVEAL ANIMATIONS (Intersection Observer)
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(reveal => { observer.observe(reveal); });
+            // Trigger first check manually in case elements are already in view
+            setTimeout(() => { window.scrollBy(0, 1); window.scrollBy(0, -1); }, 500);
+        }
+
+        // 7. MAGICAL FLOATING HEARTS GENERATOR
+        function createHearts() {
+            const container = document.getElementById("hearts-bg");
+            const heartChars = ['🤍', '🌸', '✨', '💖'];
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.classList.add("floating-heart");
+                heart.innerText = heartChars[Math.floor(Math.random() * heartChars.length)];
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 5 + 5) + "s"; // 5 to 10 seconds
+                heart.style.fontSize = (Math.random() * 1 + 1) + "rem";
+                container.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 10000); // Clean up DOM
+            }, 800); // New heart every 800ms
+        }
+
+        // 8. MODAL (POPUP) DATA & LOGIC
+        const modalData = {
             'jan2022': {
-                title: 'Where It All Began',
-                date: 'January 2022',
-                text: "I still remember the exact feeling I had when we first started talking. I was nervous, completely captivated, and knew right away you were special. Even though we had so much to learn about each other and our journey wasn't a straight line, looking back, this was the exact moment the universe shifted. My life changed forever because you walked into it.",
+                title: 'Where It All Began', date: 'January 2022',
+                text: "I still remember the exact feeling I had when we first started talking. I was nervous, completely captivated, and knew right away you were special.",
                 img: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop'
             },
             'jul2023': {
-                title: 'Making It Official',
-                date: 'July 2023',
-                text: "There is a special kind of pride that comes with telling the world, 'She is mine, and I am hers.' Making it official was such a beautiful milestone. We faced storms later that year, but the foundation we built here—the real, raw love we shared—was strong enough to survive it all.",
+                title: 'Making It Official', date: 'July 2023',
+                text: "There is a special kind of pride that comes with telling the world, 'She is mine, and I am hers.' Making it official was such a beautiful milestone.",
                 img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&auto=format&fit=crop'
             },
             'feb2026': {
-                title: 'Finding Our Way Back',
-                date: 'February 28, 2026',
-                text: "Time apart only proved one thing: a life without you isn't a life I want to live. When we found our way back to each other on this day, everything finally clicked into place. It wasn't just a patch-up; it was a realization that our souls are just meant to be intertwined forever. I chose you then, and I will choose you every day for the rest of my life.",
+                title: 'Finding Our Way Back', date: 'February 28, 2026',
+                text: "Time apart only proved one thing: a life without you isn't a life I want to live. When we found our way back to each other, everything finally clicked into place. I chose you then, and I will choose you every day for the rest of my life.",
                 img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop'
             },
             'mar2026': {
-                title: 'Meeting The Parents',
-                date: 'March 5, 2026',
-                text: "Walking up to your house to meet your parents, my heart was beating out of my chest. Not just because I wanted them to like me, but because this meant everything was real. It was the ultimate step toward our future. Sitting in your home, I didn't just see your parents; I saw my future family.",
+                title: 'Meeting The Parents', date: 'March 5, 2026',
+                text: "Walking up to your house to meet your parents, my heart was beating out of my chest. Not just because I wanted them to like me, but because this meant everything was real. It was the ultimate step toward our future.",
                 img: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&auto=format&fit=crop'
+            },
+            'env_doubt': {
+                title: 'When You Doubt Us', date: '', img: '',
+                text: "Look back at our story. For two years, we didn't speak. For two years, I didn't know if I would ever hold your hand again. But even in that silence, my love for you never wavered. Not for a single second.\n\nIf I didn't give up on us when you were completely out of my life, I am certainly never giving up on us now that I have you back. You are my forever. Stop doubting it."
+            },
+            'env_fight': {
+                title: 'When We Argue', date: '', img: '',
+                text: "Take a deep breath. Yes, I'm probably annoyed right now, and you're probably annoyed with me. \n\nBut remember this: We survived two whole years without each other. We survived heartbreaks and distance. This silly argument? We are going to survive this too. I love you way more than I love being right. Let's talk it out. I'm right here."
+            },
+            'env_miss': {
+                title: 'When You Miss Me', date: '', img: '',
+                text: "I miss you too. Whatever you're doing right now, just know that I'm probably thinking about your smile or the way you laugh.\n\nClose your eyes and remember that no matter where I am, my heart is always sitting right next to yours. I'll see you soon, beautiful."
+            },
+            'env_wedding': {
+                title: 'Our Wedding Day', date: '', img: '',
+                text: "Ah ah ah! Nice try! 😉\n\nYou are absolutely NOT allowed to read this until you are actually in your wedding dress getting ready to walk down the aisle to me.\n\nClose this right now and wait for the real day!"
             }
         };
 
-        function openModal(memoryId) {
-            // Get the specific data for the clicked memory
-            const data = memoryData[memoryId];
-            
-            // Populate the modal with the data
+        function openModal(id) {
+            const data = modalData[id];
             document.getElementById('modal-title').innerText = data.title;
-            document.getElementById('modal-date').innerText = data.date;
-            document.getElementById('modal-text').innerText = data.text;
-            document.getElementById('modal-img').src = data.img;
 
-            // Show the modal
+            // Handle optional date
+            const dateEl = document.getElementById('modal-date');
+            if (data.date) { dateEl.innerText = data.date; dateEl.style.display = 'block'; }
+            else { dateEl.style.display = 'none'; }
+
+            document.getElementById('modal-text').innerText = data.text;
+
+            // Handle optional images
+            const imgElement = document.getElementById('modal-img');
+            if (data.img) {
+                imgElement.src = data.img;
+                imgElement.style.display = 'inline-block';
+            } else {
+                imgElement.style.display = 'none';
+            }
+
             const overlay = document.getElementById('modal-overlay');
             const box = document.getElementById('modal-box');
             overlay.style.display = 'flex';
-            
-            // Small delay to allow CSS transitions to happen smoothly
-            setTimeout(() => {
-                overlay.style.opacity = '1';
-                box.style.transform = 'translateY(0)';
-            }, 10);
+            setTimeout(() => { overlay.style.opacity = '1'; box.style.transform = 'translateY(0)'; }, 10);
         }
 
         function closeModal(event) {
-            // Only close if clicking the "X" or the dark background (not inside the white box)
             if (event.target.id === 'modal-overlay' || event.target.className === 'close-btn') {
                 const overlay = document.getElementById('modal-overlay');
                 const box = document.getElementById('modal-box');
-                
                 overlay.style.opacity = '0';
-                box.style.transform = 'translateY(20px)';
-                
-                // Wait for fade out to finish before hiding completely
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 300);
+                box.style.transform = 'translateY(30px)';
+                setTimeout(() => { overlay.style.display = 'none'; }, 400);
             }
         }
     </script>
 </body>
+
 </html>
