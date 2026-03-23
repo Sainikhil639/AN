@@ -158,7 +158,6 @@
             margin-bottom: 30px;
         }
 
-        /* Scroll Reveal Animation Classes */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -174,22 +173,6 @@
            5. SPECIFIC COMPONENTS
            ========================================= */
 
-        /* Audio Player */
-        .audio-wrapper {
-            margin-top: 20px;
-            background: #fff0f1;
-            padding: 15px;
-            border-radius: 50px;
-            display: inline-block;
-            border: 1px solid var(--border-light);
-        }
-
-        audio {
-            height: 35px;
-            outline: none;
-        }
-
-        /* Counters & Timers */
         .counter-box {
             text-align: center;
             margin-bottom: 20px;
@@ -201,36 +184,6 @@
             color: var(--primary-hover);
         }
 
-        .countdown-grid {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .time-box {
-            background: #fff0f1;
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid var(--border-light);
-            min-width: 60px;
-        }
-
-        .time-box span {
-            display: block;
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary-hover);
-        }
-
-        .time-box p {
-            margin: 0;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Timeline */
         .timeline {
             border-left: 3px solid var(--primary-color);
             margin: 0 auto;
@@ -298,7 +251,6 @@
             text-align: justify;
         }
 
-        /* Reasons Grid */
         .reasons-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -325,7 +277,6 @@
             font-size: 1.2rem;
         }
 
-        /* Photo Gallery */
         .gallery {
             display: flex;
             flex-wrap: wrap;
@@ -339,6 +290,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             width: 220px;
             transition: 0.3s ease;
+            cursor: pointer;
         }
 
         .polaroid img {
@@ -369,7 +321,6 @@
             position: relative;
         }
 
-        /* Message in a Bottle */
         .bottle-container {
             background: #faf5f5;
             padding: 40px;
@@ -390,7 +341,6 @@
             line-height: 1.5;
         }
 
-        /* Envelopes */
         .envelope-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -405,11 +355,16 @@
             color: var(--primary-hover);
             font-weight: bold;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
         .envelope-btn:hover {
             background: var(--primary-color);
             color: white;
+            transform: translateY(-3px);
         }
 
         .envelope-btn span {
@@ -418,7 +373,6 @@
             margin-bottom: 10px;
         }
 
-        /* Bucket List */
         .bucket-list {
             text-align: left;
             max-width: 550px;
@@ -460,7 +414,6 @@
             color: #aaa;
         }
 
-        /* The Love Letter */
         .letter-container {
             background-color: #fdfaf6;
             padding: 40px;
@@ -490,6 +443,75 @@
             font-family: serif;
         }
 
+        /* =========================================
+           NEW TIMER SECTION STYLES
+           ========================================= */
+        .timer-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .timer-tab-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .timer-tab-btn:hover,
+        .timer-tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(201, 122, 126, 0.3);
+        }
+
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .time-box {
+            background: #fff0f1;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            min-width: 60px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-hover);
+        }
+
+        .time-box p {
+            margin: 0;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .dynamic-message {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-top: 20px;
+            display: none;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
         footer {
             text-align: center;
             padding: 50px 20px;
@@ -498,10 +520,11 @@
             font-size: 2.2rem;
             margin-top: 40px;
             position: relative;
+            margin-top: -70px;
         }
 
         /* =========================================
-           6. MODAL (POPUP) & ANIMATIONS
+           MODAL (POPUP) & ANIMATIONS
            ========================================= */
         #modal-overlay {
             display: none;
@@ -587,7 +610,6 @@
             white-space: pre-wrap;
         }
 
-        /* Background Floating Hearts Container */
         #hearts-bg {
             position: fixed;
             top: 0;
@@ -628,9 +650,10 @@
             }
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-
+        /* =========================================
+           RESPONSIVE ADJUSTMENTS
+           ========================================= */
+        @media (max-width: 768px) {
             .love-bg h1,
             #password-screen h1 {
                 font-size: 3rem;
@@ -640,6 +663,10 @@
             #modal-title,
             .letter-container-p {
                 font-size: 2rem;
+            }
+
+            .dynamic-message {
+                font-size: 2.5rem;
             }
 
             .love-bg p,
@@ -695,19 +722,39 @@
             footer {
                 padding: 30px 20px;
                 font-size: 1.5rem;
+                padding-bottom: 55px;
             }
 
             .reason-card {
                 padding: 15px;
             }
-            .polaroid {
-                width: 125px;
-                max-width: 300px;
-            }
-            .polaroid img {
-                height: 150px;
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
             }
 
+            .polaroid {
+                max-width: 100%;
+                width: 150px;
+                padding: 8px 8px 25px 8px;
+            }
+
+            .polaroid img {
+                height: 140px;
+            }
+
+            .timer-tabs {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .timer-tab-btn {
+                width: 100%;
+                padding: 10px 10px;
+                font-size: 0.9rem;
+                border: 1.5px solid var(--primary-color);
+            }
         }
     </style>
 </head>
@@ -744,15 +791,6 @@
                 <h3 id="days-counter">0 Days</h3>
                 <p>since our story began, proving true love always finds a way.</p>
             </div>
-
-            <!-- <div class="audio-wrapper">
-                <p style="margin: 0 0 5px 0; font-size: 0.9rem; font-weight: bold; color: #a86266;">🎵 Play Our Song</p>
-                <audio controls loop>
-                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div> -->
-
         </div>
 
         <div style="margin-top: -60px;" class="section reveal">
@@ -793,8 +831,7 @@
                     when we found our way back to each other, I knew this was forever.</p>
                 <p>Meeting your parents just sealed what my heart already knew. You are my best friend, my greatest
                     adventure, and my future wife. I promise to hold onto us, through the good days and the bad.</p>
-                <p>Forever Yours,<br><span class="letter-container-p">Nikhil</span>
-                </p>
+                <p>Forever Yours,<br><span class="letter-container-p">Nikhil</span></p>
             </div>
         </div>
 
@@ -881,73 +918,85 @@
         <div class="section reveal">
             <h2>Our Memories</h2>
             <div class="gallery">
-                <div class="polaroid">
+                <div class="polaroid" onclick="openModal('gallery1')">
                     <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&auto=format&fit=crop"
                         alt="Memory 1">
                     <p>Our First Trip</p>
                 </div>
-                <div class="polaroid">
+                <div class="polaroid" onclick="openModal('gallery2')">
                     <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&auto=format&fit=crop"
                         alt="Memory 2">
                     <p>That perfect sunset</p>
                 </div>
-                <div class="polaroid">
+                <div class="polaroid" onclick="openModal('gallery3')">
                     <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&auto=format&fit=crop"
-                        alt="Memory 1">
-                    <p>Our First Trip</p>
+                        alt="Memory 3">
+                    <p>Just being silly</p>
                 </div>
-                <div class="polaroid">
+                <div class="polaroid" onclick="openModal('gallery4')">
                     <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&auto=format&fit=crop"
-                        alt="Memory 2">
-                    <p>That perfect sunset</p>
-                </div>
-                <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&auto=format&fit=crop"
-                        alt="Memory 1">
-                    <p>Our First Trip</p>
-                </div>
-                <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&auto=format&fit=crop"
-                        alt="Memory 2">
-                    <p>That perfect sunset</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section reveal"
-            style="background: transparent; box-shadow: none; border-top: 2px dashed var(--border-light); border-radius: 0;">
-            <h2 style="border: none;">Waiting For Our Future</h2>
-            <p>I don't know the exact date yet, but I am already counting down the days until I can call you my wife.
-            </p>
-            <div class="countdown-grid">
-                <div class="time-box"><span id="cd-days">00</span>
-                    <p>Days</p>
-                </div>
-                <div class="time-box"><span id="cd-hours">00</span>
-                    <p>Hours</p>
-                </div>
-                <div class="time-box"><span id="cd-mins">00</span>
-                    <p>Mins</p>
-                </div>
-                <div class="time-box"><span id="cd-secs">00</span>
-                    <p>Secs</p>
+                        alt="Memory 4">
+                    <p>Beautiful moments</p>
                 </div>
             </div>
         </div>
 
         <footer>
+            <div class="section reveal"
+                style="background: transparent; box-shadow: none; border-bottom: 2px dashed var(--border-light); border-top: 2px dashed var(--border-light); border-radius: 0;">
+
+                <div class="timer-tabs">
+                    <button class="timer-tab-btn active" id="btn-meet" onclick="switchTab('meet')">Next Meet</button>
+                    <button class="timer-tab-btn" id="btn-wedding" onclick="switchTab('wedding')">Our
+                        Wedding</button>
+                    <button class="timer-tab-btn" id="btn-birthday" onclick="switchTab('birthday')">Your
+                        Birthday</button>
+                </div>
+
+                <h2 id="timer-title" style="border: none;">Waiting For Our Future</h2>
+                <p id="timer-desc">I don't know the exact date yet, but I am already counting down the days until I can
+                    call
+                    you my wife.</p>
+
+                <div class="countdown-grid" id="countdown-grid">
+                    <div class="time-box"><span id="cd-days">00</span>
+                        <p>Days</p>
+                    </div>
+                    <div class="time-box"><span id="cd-hours">00</span>
+                        <p>Hours</p>
+                    </div>
+                    <div class="time-box"><span id="cd-mins">00</span>
+                        <p>Mins</p>
+                    </div>
+                    <div class="time-box"><span id="cd-secs">00</span>
+                        <p>Secs</p>
+                    </div>
+                </div>
+
+                <div id="dynamic-message" class="dynamic-message">I Love You ❤️</div>
+
+            </div>
+
             I loved you then, I loved you in the silence, and I love you now.
         </footer>
     </div>
 
     <script>
+        // TARGET DATES CONSTANTS
+        const TARGET_WEDDING = new Date("feb 14, 2028 00:00:00").getTime();
+        const TARGET_MEET_DATE = new Date("Apr 08, 2026 00:00:00");
+        const TARGET_MEET = TARGET_MEET_DATE.getTime();
 
-        const weddingDate = new Date("Dec 31, 2026 00:00:00").getTime();
-        const nextMeetDate = new Date("Mar 5, 2026 00:00:00").getTime(); // For "Meeting The Parents" countdown
+        // Birthday Constants (0-indexed month. 6 = July)
+        const BDAY_MONTH = 6;
+        const BDAY_DAY = 19;
+
         const startDate = new Date(2022, 0, 1);
         const today = new Date();
         const daysDifference = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-        const heartChars = ['🤍', '🌸', '✨', '💖'];
+
+        // const heartChars = ['🤍', '🌸', '✨', '💖', '🖤', '❤️', '🩷', '💜'];
+        const heartChars = ['🖤', '❤️'];
 
         const notes = [
             "Even when you needed space and we weren't speaking, my heart never stopped belonging to you.",
@@ -995,12 +1044,129 @@
             'env_wedding': {
                 title: 'Our Wedding Day', date: '', img: '',
                 text: "Ah ah ah! Nice try! 😉\n\nYou are absolutely NOT allowed to read this until you are actually in your wedding dress getting ready to walk down the aisle to me.\n\nClose this right now and wait for the real day!"
+            },
+            'gallery1': {
+                title: 'Our First Trip',
+                date: 'Summer 2023',
+                text: "I'll never forget how much fun we had this day. Every time I look at this picture, it takes me right back to laughing with you.",
+                img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&auto=format&fit=crop'
+            },
+            'gallery2': {
+                title: 'That Perfect Sunset',
+                date: 'Fall 2023',
+                text: "We just sat there watching the sun go down. It was quiet, it was peaceful, and it was absolutely perfect because I was with you.",
+                img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop'
+            },
+            'gallery3': {
+                title: 'Memory 3',
+                date: 'Date goes here',
+                text: "This is where you can write a short story or inside joke about this specific picture. Remind her how she looked or what you were thinking.",
+                img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&auto=format&fit=crop'
+            },
+            'gallery4': {
+                title: 'Memory 4',
+                date: 'Date goes here',
+                text: "Replace this text with another beautiful memory. When she clicks the picture, she will read this message from you.",
+                img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop'
             }
         };
 
         document.getElementById("days-counter").innerText = daysDifference.toLocaleString() + " Days";
 
-        // PASSWORD & INITIALIZATION
+        let currentTimerTab = 'meet'; // Default tab
+
+        function switchTab(tabName) {
+            currentTimerTab = tabName;
+
+            // Remove active class from all buttons, add to the clicked one
+            document.querySelectorAll('.timer-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + tabName).classList.add('active');
+
+            // Force an immediate update so the user doesn't wait 1 second
+            updateTimerLogic();
+        }
+
+        function updateTimerLogic() {
+            const nowObj = new Date();
+            const now = nowObj.getTime();
+            let distance = 0;
+            let showTimer = true;
+            let finalMessage = "";
+
+            const titleEl = document.getElementById('timer-title');
+            const descEl = document.getElementById('timer-desc');
+            const gridEl = document.getElementById('countdown-grid');
+            const msgEl = document.getElementById('dynamic-message');
+
+            // 1. WEDDING TAB
+            if (currentTimerTab === 'wedding') {
+                titleEl.innerText = "Waiting For Our Future";
+                descEl.innerText = "I am already counting down the days until I can call you my wife.";
+                distance = TARGET_WEDDING - now;
+
+                if (distance <= 0) {
+                    showTimer = false;
+                    finalMessage = "I Love You ❤️";
+                }
+            }
+
+            // 2. BIRTHDAY TAB
+            else if (currentTimerTab === 'birthday') {
+                titleEl.innerText = "Your Special Day";
+                descEl.innerText = "Counting down to celebrate the day my favorite person was born.";
+
+                let currentYear = nowObj.getFullYear();
+                let bdayThisYear = new Date(currentYear, BDAY_MONTH, BDAY_DAY);
+
+                // Check if today is literally the birthday
+                let isToday = (nowObj.getMonth() === BDAY_MONTH && nowObj.getDate() === BDAY_DAY);
+
+                if (isToday) {
+                    showTimer = false;
+                    finalMessage = "Happy Birthday! 🎉";
+                } else {
+                    // If the birthday has already passed this year, countdown to next year
+                    if (now > bdayThisYear.getTime()) {
+                        bdayThisYear = new Date(currentYear + 1, BDAY_MONTH, BDAY_DAY);
+                    }
+                    distance = bdayThisYear.getTime() - now;
+                }
+            }
+
+            // 3. NEXT MEET TAB
+            else if (currentTimerTab === 'meet') {
+                titleEl.innerText = "Next Meet: " + formatDate(TARGET_MEET_DATE);
+                descEl.innerText = "Counting down the seconds until I can see you again.";
+                distance = TARGET_MEET - now;
+
+                if (distance <= 0) {
+                    showTimer = false;
+                    finalMessage = "Waiting for next meet...";
+                }
+            }
+
+            // Display Logic: Show either the clock numbers OR the text message
+            if (showTimer) {
+                gridEl.style.display = "flex";
+                msgEl.style.display = "none";
+                document.getElementById("cd-days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById("cd-hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("cd-mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("cd-secs").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+            } else {
+                gridEl.style.display = "none";
+                msgEl.style.display = "block";
+                msgEl.innerText = finalMessage;
+            }
+        }
+
+        // Run the timer update every 1 second
+        setInterval(updateTimerLogic, 1000);
+
+
+        // =========================================
+        // PASSWORD & OTHER LOGIC
+        // =========================================
         function checkPassword() {
             var password = document.getElementById("secret-password").value.toLowerCase();
             if (password === "2026") {
@@ -1008,12 +1174,11 @@
                 setTimeout(function () {
                     document.getElementById("password-screen").style.display = "none";
                     document.getElementById("main-content").style.display = "block";
-                    document.getElementById("hearts-bg").style.display = "block"; // Start magic hearts
-                    createHearts(); // Generate hearts
-
+                    document.getElementById("hearts-bg").style.display = "block";
+                    createHearts();
                     setTimeout(function () {
                         document.getElementById("main-content").style.opacity = "1";
-                        initScrollReveal(); // Start the scroll animations
+                        initScrollReveal();
                     }, 50);
                 }, 1000);
             } else {
@@ -1021,19 +1186,6 @@
             }
         }
 
-        // FUTURE WEDDING COUNTDOWN (Placeholder date: Dec 31, 2026)
-        setInterval(function () {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-            if (distance > 0) {
-                document.getElementById("cd-days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-                document.getElementById("cd-hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("cd-mins").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("cd-secs").innerText = Math.floor((distance % (1000 * 60)) / 1000);
-            }
-        }, 1000);
-
-        // RANDOM LOVE NOTE GENERATOR 
         function generateNote() {
             const display = document.getElementById('note-display');
             display.style.opacity = 0;
@@ -1044,30 +1196,23 @@
             }, 300);
         }
 
-        // BUCKET LIST TOGGLE
         function toggleStrike(checkbox) {
             const parentDiv = checkbox.parentElement;
             if (checkbox.checked) { parentDiv.classList.add('struck'); }
             else { parentDiv.classList.remove('struck'); }
         }
 
-        // SCROLL REVEAL ANIMATIONS (Intersection Observer)
         function initScrollReveal() {
             const reveals = document.querySelectorAll(".reveal");
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("active");
-                    }
+                    if (entry.isIntersecting) { entry.target.classList.add("active"); }
                 });
             }, { threshold: 0.1 });
-
             reveals.forEach(reveal => { observer.observe(reveal); });
-            // Trigger first check manually in case elements are already in view
             setTimeout(() => { window.scrollBy(0, 1); window.scrollBy(0, -1); }, 500);
         }
 
-        // MAGICAL FLOATING HEARTS GENERATOR
         function createHearts() {
             const container = document.getElementById("hearts-bg");
             setInterval(() => {
@@ -1075,25 +1220,23 @@
                 heart.classList.add("floating-heart");
                 heart.innerText = heartChars[Math.floor(Math.random() * heartChars.length)];
                 heart.style.left = Math.random() * 100 + "vw";
-                heart.style.animationDuration = (Math.random() * 5 + 5) + "s"; // 5 to 10 seconds
+                heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
                 heart.style.fontSize = (Math.random() * 1 + 1) + "rem";
                 container.appendChild(heart);
-                setTimeout(() => { heart.remove(); }, 10000); // Clean up DOM
-            }, 800); // New heart every 800ms
+                setTimeout(() => { heart.remove(); }, 10000);
+            }, 800);
         }
 
         function openModal(id) {
             const data = modalData[id];
             document.getElementById('modal-title').innerText = data.title;
 
-            // Handle optional date
             const dateEl = document.getElementById('modal-date');
             if (data.date) { dateEl.innerText = data.date; dateEl.style.display = 'block'; }
             else { dateEl.style.display = 'none'; }
 
             document.getElementById('modal-text').innerText = data.text;
 
-            // Handle optional images
             const imgElement = document.getElementById('modal-img');
             if (data.img) {
                 imgElement.src = data.img;
@@ -1108,6 +1251,13 @@
             setTimeout(() => { overlay.style.opacity = '1'; box.style.transform = 'translateY(0)'; }, 10);
         }
 
+        // The Helper Function
+        function formatDate(dateObj) {
+            const options = { month: 'long', day: 'numeric' }; // Gives "April 8"
+            return dateObj.toLocaleDateString('en-US', options);
+        }
+
+
         function closeModal(event) {
             if (event.target.id === 'modal-overlay' || event.target.className === 'close-btn') {
                 const overlay = document.getElementById('modal-overlay');
@@ -1117,9 +1267,7 @@
                 setTimeout(() => { overlay.style.display = 'none'; }, 400);
             }
         }
-
     </script>
-
 </body>
 
 </html>
